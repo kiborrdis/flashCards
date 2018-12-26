@@ -1,10 +1,20 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
+import { createStackNavigator } from "react-navigation";
 import DecksContainer from './containers/DecksContainer';
 
 class DecksScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Decks',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Decks',
+      headerRight: (
+        <Button
+          onPress={() => navigation.navigate('NewDeckModal')}
+          title="+"
+          color="black"
+        />
+      ),
+    };
   };
 
   render() {

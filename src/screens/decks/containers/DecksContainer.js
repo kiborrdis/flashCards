@@ -12,7 +12,10 @@ class DecksContainer extends React.Component {
   }
 
   openNewDeckModal = () => {
-    this.setState({ newDeckModalOpened: true });
+    const { navigate } = this.props;
+
+    navigate('NewDeckModal');
+    // this.setState({ newDeckModalOpened: true });
   }
 
   closeNewDeckModal = () => {
@@ -20,11 +23,14 @@ class DecksContainer extends React.Component {
   }
 
   addDeck = async (deckName) => {
-    const { updateData } = this.props;
+    const { navigate } = this.props;
 
-    await database.executeSql(createDeck(deckName)); 
+    navigate('NewDeckModal', { deckId });
+    // const { updateData } = this.props;
 
-    updateData();
+    // await database.executeSql(createDeck(deckName)); 
+
+    // updateData();
   }
 
   onItemPress = (deckId) => {

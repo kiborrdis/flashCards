@@ -4,11 +4,6 @@ import Toolbar from './Toolbar';
 
 const ToolbarLayout = ({ children, title, actions, onActionSelected }) => (
   <View style={styles.container}>
-    <Toolbar
-      title={title} 
-      actions={actions}
-      onActionSelected={onActionSelected}
-    />
     <View style={styles.content}>
       {children}
     </View>

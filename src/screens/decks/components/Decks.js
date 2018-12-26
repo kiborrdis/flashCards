@@ -3,15 +3,10 @@ import { View, Text, FlatList } from 'react-native';
 import ToolbarLayout from 'memoCards/src/shared/components/ToolbarLayout';
 import LoadingWrapper from 'memoCards/src/shared/components/LoadingWrapper';
 import DeckListItem from './DeckListItem';
-import NewDeckModal from './NewDeckModal';
 
-const Decks = ({ addDeck, onItemPress, loaded, data, openNewDeckModal, closeNewDeckModal, newDeckModalOpened }) => {
+const Decks = ({ onItemPress, loaded, data }) => {
   return (
-    <ToolbarLayout
-      title="Decks" 
-      actions={[{ title: '+', show: 'always' }]}
-      onActionSelected={openNewDeckModal}
-    >
+    <ToolbarLayout>
       <LoadingWrapper loading={!loaded}>
         {() => (
           <FlatList
@@ -21,8 +16,6 @@ const Decks = ({ addDeck, onItemPress, loaded, data, openNewDeckModal, closeNewD
           />
         )}
       </LoadingWrapper>
-
-      <NewDeckModal visible={newDeckModalOpened} close={closeNewDeckModal} onApplyClick={addDeck} />
     </ToolbarLayout>
   );
 } 
