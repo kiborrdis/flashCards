@@ -5,6 +5,7 @@ import DatabaseContainer from './containers/DatabaseContainer';
 import Decks from './screens/decks';
 import Cards from './screens/cards';
 import Card from './screens/card';
+import ScreensNavigation from './screens';
 
 if (__DEV__) {
     console.log('I am in debug');
@@ -14,7 +15,7 @@ const App = () => (
   <DatabaseContainer>
     {({ loaded }) => (
       <LoadingWrapper loading={!loaded}>
-        {() => <Card deckId={1} />}
+        {() => <ScreensNavigation/>}
       </LoadingWrapper>
     )} 
   </DatabaseContainer>

@@ -7,7 +7,7 @@ import Cards from '../components/Cards';
 class CardsContainer extends React.Component {
   addCard = () => {
     const { deckId, updateData } = this.props;
-    console.log('!!!!!!!!!!!!!!', deckId);
+
     database.executeSql(createCardInDeck(deckId, {
       frontside: 'Лицевая',
       backside: 'Backside',
