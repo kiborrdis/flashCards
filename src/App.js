@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { ToolbarAndroid, Platform, StyleSheet, Text, View, StatusBar, ActivityIndicator, ProgressBarAndroid } from 'react-native';
 import LoadingWrapper from 'memoCards/src/shared/components/LoadingWrapper';
 import DatabaseContainer from './containers/DatabaseContainer';
@@ -10,14 +10,17 @@ if (__DEV__) {
     console.log('I am in debug');
 }
 
-const App = () => (
-  <DatabaseContainer>
-    {({ loaded }) => (
-      <LoadingWrapper loading={!loaded}>
-        {() => <Card deckId={1} />}
-      </LoadingWrapper>
-    )} 
-  </DatabaseContainer>
-);
+class App extends React.Component {
+  render () {
+    return <Text>Hello world</Text>
+  }
+}
 
+  // <DatabaseContainer>
+  //   {({ loaded }) => (
+  //     <LoadingWrapper loading={!loaded}>
+  //       {() => <Card deckId={1} />}
+  //     </LoadingWrapper>
+  //   )} 
+  // </DatabaseContainer>
 export default App;
