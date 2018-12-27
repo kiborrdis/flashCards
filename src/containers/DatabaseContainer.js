@@ -7,7 +7,7 @@ class DatabaseContainer extends React.Component {
     super(props);
 
     this.state = {
-      initialized: false,
+      initialized: database.isOpened(),
       appState: AppState.currentState,
     };
   }
@@ -15,7 +15,10 @@ class DatabaseContainer extends React.Component {
   componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange);
 
-    this.openDatabase();
+
+    if (!this.state.initialized) {
+     this.openDatabase();
+    }
   }
 
   componentWillUnmount() {
@@ -54,8 +57,6 @@ class DatabaseContainer extends React.Component {
 
   render () {
     const { children } = this.props;
-
-    console.log('render DatabaseContainer');
 
     return children({ loaded: this.state.initialized, });
   }

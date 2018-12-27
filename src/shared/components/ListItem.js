@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 
-const ListItem = ({ children }) => (
-  <View style={styles.container}>
-    {children}
-  </View>
+const ListItem = ({ children, onPress }) => (
+  <TouchableHighlight onPress={(onPress)}>
+    <View style={styles.container}>
+      {children}
+    </View>
+  </TouchableHighlight>
 );
 
 const styles  = StyleSheet.create({

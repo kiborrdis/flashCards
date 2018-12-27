@@ -5,7 +5,7 @@ import LoadingWrapper from 'memoCards/src/shared/components/LoadingWrapper';
 import DeckListItem from './DeckListItem';
 import NewDeckModal from './NewDeckModal';
 
-const Decks = ({ addDeck, loaded, data, openNewDeckModal, closeNewDeckModal, newDeckModalOpened }) => {
+const Decks = ({ onItemPress, addDeck, loaded, data, openNewDeckModal, closeNewDeckModal, newDeckModalOpened }) => {
   return (
     <ToolbarLayout
       title="Decks" 
@@ -17,7 +17,7 @@ const Decks = ({ addDeck, loaded, data, openNewDeckModal, closeNewDeckModal, new
           <FlatList
             data={data}
             keyExtractor={({ deckId }) => String(deckId)}
-            renderItem={({ item }) => (<DeckListItem label={item.name}/>)}
+            renderItem={({ item }) => (<DeckListItem onPress={onItemPress} id={item.deckId} label={item.name}/>)}
           />
         )}
       </LoadingWrapper>

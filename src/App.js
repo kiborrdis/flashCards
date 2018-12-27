@@ -12,15 +12,11 @@ if (__DEV__) {
 
 class App extends React.Component {
   render () {
-    return <Text>Hello world</Text>
+    return (
+      <Text>App</Text>
+    );
+    // return <Text>Hello world</Text>
   }
 }
 
-  // <DatabaseContainer>
-  //   {({ loaded }) => (
-  //     <LoadingWrapper loading={!loaded}>
-  //       {() => <Card deckId={1} />}
-  //     </LoadingWrapper>
-  //   )} 
-  // </DatabaseContainer>
 export default App;

@@ -2,8 +2,8 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import ListItem from 'memoCards/src/shared/components/ListItem';
 
-const DeckListItem = ({ label }) => (
-  <ListItem>
+const DeckListItem = ({ label, onPress, id }) => (
+  <ListItem onPress={() => onPress(id)}>
     <Text style={styles.label}>{label}</Text>
   </ListItem>
 );
