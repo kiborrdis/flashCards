@@ -13,6 +13,7 @@ class Database {
     this._location = location;
     this._database = null;
     this._opened = false;
+    this._statusListeners = [];
   }
 
   async open() {
@@ -61,12 +62,30 @@ class Database {
 
   onDatabaseCloseSuccess = () => {
     this._opened = false;
+
+    this._database = null;
+
+    this.triggerStatusListeners(this._opened);
   }
 
   onDatabaseOpenSuccess = (db) => {
     this._database = db;
 
     this._opened = true;
+
+    this.triggerStatusListeners(this._opened);
+  }
+
+  triggerStatusListeners(value) {
+    this._statusListeners.forEach(listener => listener(value));
+  }
+
+  addDatabaseStatusListener (callback) {
+    this._statusListeners.push(callback);
+
+    return () => {
+      this._statusListeners.splice(this._statusListeners.indexOf(callback), 1);
+    }
   }
 
   isOpened() {

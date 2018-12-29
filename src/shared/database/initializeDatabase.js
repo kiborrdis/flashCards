@@ -28,6 +28,5 @@ function createTables(transaction) {
 }
 
 export default function initializeDatabase(database) {
-  console.log('init db');
   return database.transaction(createTables).catch(() => { console.log('error'); });
 }

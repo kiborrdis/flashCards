@@ -1,10 +1,13 @@
 import React from 'react';
 import { AppState } from 'react-native';
+import { Navigation } from "react-native-navigation";
 import database from 'memoCards/src/shared/database/Database';
 
 class DatabaseContainer extends React.Component {
   constructor(props) {
     super(props);
+
+    this._dbStatusSubscription = database.addDatabaseStatusListener(this.onDatabaseStatusChange);
 
     this.state = {
       initialized: database.isOpened(),
@@ -14,44 +17,25 @@ class DatabaseContainer extends React.Component {
 
   componentDidMount() {
     AppState.addEventListener('change', this.handleAppStateChange);
-
-
-    if (!this.state.initialized) {
-     this.openDatabase();
-    }
   }
 
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppStateChange);
+
+    this._dbStatusSubscription();
   }
 
-  openDatabase() {
-    database.open().then(() => {
-      this.setState({ initialized: true });
-    });
-  }
-
-  closeDatabase() {
-    database.close().then(() => {
-      // do something about it
-    });
+  onDatabaseStatusChange = (databaseOpened) => {
+    this.setState({ initialized: databaseOpened });
   }
 
   onAppComeForeground = () => {
-    this.openDatabase();
-  }
-
-  onAppComeBackground = () => {
-    this.closeDatabase();
+    this.setState({ initialized: database.isOpened() });
   }
 
   handleAppStateChange = (nextAppState) => {
     if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') {
       this.onAppComeForeground();
-    }
-
-    if (this.state.appState.match(/inactive|active/) && nextAppState === 'background') {
-      this.onAppComeBackground();
     }
   }
 

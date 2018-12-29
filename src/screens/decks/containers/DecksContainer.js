@@ -1,21 +1,26 @@
 import React from 'react';
+import { Navigation } from "react-native-navigation";
 import withDatabaseData from 'memoCards/src/shared/containers/withDatabaseData';
 import database from 'memoCards/src/shared/database/Database';
 import { getDecks, createDeck } from 'memoCards/src/shared/database/queryCreators';
-import { Navigation } from "react-native-navigation";
+import { makeCardsOfDeckScreen, makePromptScreen } from 'memoCards/src/shared/navigation';
 import Decks from '../components/Decks';
 
 class DecksContainer extends React.Component {
-  state = {
-    newDeckModalOpened: false,
+  constructor(props) {
+    super(props);
+
+    Navigation.events().bindComponent(this);
+  }
+
+  navigationButtonPressed({ buttonId }) {
+    if (buttonId === 'addDeckButton') {
+      this.openNewDeckModal();
+    }
   }
 
   openNewDeckModal = () => {
-    this.setState({ newDeckModalOpened: true });
-  }
-
-  closeNewDeckModal = () => {
-    this.setState({ newDeckModalOpened: false });
+    Navigation.showModal(makePromptScreen({ title: 'New deck', onApply: this.addDeck }));
   }
 
   addDeck = async (deckName) => {
@@ -27,21 +32,7 @@ class DecksContainer extends React.Component {
   }
 
   onItemPress = (id) => {
-    Navigation.push(this.props.componentId, {
-      component: { 
-        name: 'memoCards.cards',
-        passProps: {
-          deckId: id,
-        },
-        options: {
-          topBar: {
-            title: {
-              text: 'Cards',
-            },
-          },
-        },
-      },
-    });
+    Navigation.push(this.props.componentId, makeCardsOfDeckScreen(id));
   }
 
   render() {
@@ -49,11 +40,7 @@ class DecksContainer extends React.Component {
 
     return (
       <Decks
-        openNewDeckModal={this.openNewDeckModal}
-        closeNewDeckModal={this.closeNewDeckModal}
-        newDeckModalOpened={this.state.newDeckModalOpened}
         onItemPress={this.onItemPress}
-        addDeck={this.addDeck} 
         loaded={loaded} 
         data={data} />
     );

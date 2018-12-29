@@ -2,30 +2,28 @@ import { Navigation } from "react-native-navigation";
 import Card from './card';
 import Cards from './cards';
 import Decks from './decks';
-
-export const CARD = 'memoCards.card';
-export const CARDS = 'memoCards.cards';
-export const DECKS = 'memoCards.decks';
+import PromptModal from './promptModal';
+import { CARD, CARDS, DECKS, PROMPT } from 'memoCards/src/shared/navigation';
 
 export const screens = new Map();
 
 screens.set(CARD, Card);
 screens.set(CARDS, Cards);
 screens.set(DECKS, Decks);
+screens.set(PROMPT, PromptModal);
 
 const topBarOptions = {
   background: {
     color: 'black',
   },
   title: {
-    text: 'Decks',
     color: 'white',
   },
   backButton: {
     color: 'white',
   },
 };
-// icon: require('./iconName1.png'),
+
 const stackConfig = { 
   stack: {
     children: [
@@ -78,24 +76,4 @@ const bottomTabsConfig = {
   }
 };
 
-export const screensConfig = bottomTabsConfig;
-
-// bottomTabs: {
-//   id: 'ROOT',
-//   children: [
-//     { 
-//       stack: {
-//         children: [
-//           {
-//             component: {
-//               name: DECKS,
-//             }
-//           }
-//         ],
-//         options: {
-//           topBar: topBarOptions
-//         }
-//       }
-//     }
-//   ],
-// }
+export const screensConfig = stackConfig;
