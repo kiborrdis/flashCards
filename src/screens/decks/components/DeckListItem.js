@@ -5,17 +5,19 @@ import ListItem from 'shared/components/ListItem';
 import Label from 'shared/components/Label';
 
 
-const DeckListItem = ({ label, onPress, id }) => (
+const DeckListItem = ({ label, numberOfCards = 0, onPress, id }) => (
   <ListItem onPress={() => onPress(id)}>
-    <Label>{label}</Label>
+    <View style={styles.item}>
+      <Label>{label}</Label>
+      <Label>{numberOfCards}</Label>
+    </View>
   </ListItem>
 );
 
 const styles  = StyleSheet.create({
-  label: {
-    fontSize: 15,
-    color: TEXT_COLOR,
-    fontWeight: '400',
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   }
 });
 

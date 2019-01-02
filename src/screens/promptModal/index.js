@@ -19,7 +19,7 @@ class PromptScreen extends React.Component {
 
   render() {
     const { onApply, title } = this.props;
-    console.log('????????????????????', onApply);
+
     return <PromptModal close={this.close} onApply={onApply} title={title} />
   }
 }

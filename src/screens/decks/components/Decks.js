@@ -4,17 +4,19 @@ import ToolbarLayout from 'memoCards/src/shared/components/ToolbarLayout';
 import LoadingWrapper from 'memoCards/src/shared/components/LoadingWrapper';
 import DeckListItem from './DeckListItem';
 
-const Decks = ({ onItemPress, loaded, data }) => {
+const Decks = ({ onItemPress, loaded, data = [] }) => {
   return (
     <ToolbarLayout>
       <LoadingWrapper loading={!loaded}>
-        {() => (
-          <FlatList
+        {() => {
+
+          return <FlatList
             data={data}
             keyExtractor={({ deckId }) => String(deckId)}
-            renderItem={({ item }) => (<DeckListItem onPress={onItemPress} id={item.deckId} label={item.name}/>)}
+            renderItem={({ item }) => (<DeckListItem onPress={onItemPress} id={item.deckId} label={item.name} numberOfCards={item.numberOfCards}/>)}
           />
-        )}
+        }
+        }
       </LoadingWrapper>
     </ToolbarLayout>
   );
