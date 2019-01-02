@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigation } from "react-native-navigation";
 import database from '../database/Database';
 
 const withDatabaseData = (makeQueryFromProps) => (Component) => {
@@ -6,6 +7,16 @@ const withDatabaseData = (makeQueryFromProps) => (Component) => {
     state = {
       loaded: false,
       data: null,
+    }
+
+    constructor(props) {
+      super(props);
+
+      Navigation.events().bindComponent(this);
+    }
+
+    componentDidAppear() {
+      this.updateData();
     }
 
     componentDidMount() {
