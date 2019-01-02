@@ -1,4 +1,5 @@
-import { Navigation } from "react-native-navigation";
+import { Navigation } from 'react-native-navigation';
+import { TOPBAR_COLOR, TEXT_COLOR } from 'shared/styles';
 import Card from './card';
 import Cards from './cards';
 import Decks from './decks';
@@ -14,13 +15,13 @@ screens.set(PROMPT, PromptModal);
 
 const topBarOptions = {
   background: {
-    color: 'black',
+    color: TOPBAR_COLOR,
   },
   title: {
-    color: 'white',
+    color: TEXT_COLOR,
   },
   backButton: {
-    color: 'white',
+    color: TEXT_COLOR,
   },
 };
 

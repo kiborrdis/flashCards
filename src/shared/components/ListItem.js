@@ -1,4 +1,5 @@
 import React from 'react';
+import { SEPARATOR_COLOR } from '../styles';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 
 const ListItem = ({ children, onPress }) => (
@@ -18,8 +19,8 @@ const styles  = StyleSheet.create({
     paddingLeft: 20,
     paddingTop: 5,
     paddingBottom: 5,
-    borderTopColor: '#ddd',
-    borderTopWidth: 1,
+    borderBottomColor: SEPARATOR_COLOR,
+    borderBottomWidth: 1,
     borderStyle: 'solid',
   },
 });

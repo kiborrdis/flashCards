@@ -1,17 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import ListItem from 'memoCards/src/shared/components/ListItem';
+import { TEXT_COLOR } from 'shared/styles';
+import ListItem from 'shared/components/ListItem';
+import Label from 'shared/components/Label';
+
 
 const DeckListItem = ({ label, onPress, id }) => (
   <ListItem onPress={() => onPress(id)}>
-    <Text style={styles.label}>{label}</Text>
+    <Label>{label}</Label>
   </ListItem>
 );
 
 const styles  = StyleSheet.create({
   label: {
     fontSize: 15,
-    color: '#555',
+    color: TEXT_COLOR,
     fontWeight: '400',
   }
 });
