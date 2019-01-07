@@ -33,9 +33,9 @@ function createTables(transaction) {
       trialId INTEGER PRIMARY KEY AUTOINCREMENT, 
       deckId INTEGER, 
       type TEXT DEFAULT 'default',  
-      numberOfCards INTEGER,
-      numberOfViewedCards INTEGER,
-      numberOfMatchedCards INTEGER,
+      numberOfCards INTEGER DEFAULT 0,
+      numberOfViewedCards INTEGER DEFAULT 0,
+      numberOfMatchedCards INTEGER DEFAULT 0,
       createdAt INTEGER DEFAULT 0 
 
       REFERENCES Decks (deckId)

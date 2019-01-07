@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { BACKGROUND_COLOR } from '../styles';
 import Toolbar from './Toolbar';
 
-const ToolbarLayout = ({ children, title, actions, onActionSelected }) => (
+const ToolbarLayout = ({ children }) => (
   <View style={styles.container}>
     <View style={styles.content}>
       {children}

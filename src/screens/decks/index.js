@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linking } from 'react-native';
 import Decks from './containers/DecksContainer';
 
 class DecksScreen extends React.Component {
@@ -11,8 +12,7 @@ class DecksScreen extends React.Component {
         rightButtons: [
           {
             id: 'addDeckButton',
-            text: '+',
-            color: 'white',
+            icon: require('shared/icons/plus.png'),
           }
         ]
       }

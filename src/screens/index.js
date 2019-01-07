@@ -1,80 +1,20 @@
 import { Navigation } from 'react-native-navigation';
-import { TOPBAR_COLOR, TEXT_COLOR } from 'shared/styles';
-import Card from './card';
-import Cards from './cards';
+import { TOPBAR_COLOR, BACKGROUND_COLOR, TEXT_COLOR } from 'shared/styles';
 import Decks from './decks';
+import DeckStats from './deckStats';
+import DeckCards from './deckCards';
+import NewCard from './newCard';
+import Trial from './trial';
 import PromptModal from './promptModal';
-import { CARD, CARDS, DECKS, PROMPT } from 'memoCards/src/shared/navigation';
+import { CARD, CARDS, DECKS, PROMPT, NEW_CARD, TRIAL, DECK_CARDS, DECK_STATS } from 'memoCards/src/shared/navigation';
 
-export const screens = new Map();
+export default screens = new Map();
 
-screens.set(CARD, Card);
-screens.set(CARDS, Cards);
 screens.set(DECKS, Decks);
 screens.set(PROMPT, PromptModal);
+screens.set(NEW_CARD, NewCard);
+screens.set(TRIAL, Trial);
 
-const topBarOptions = {
-  background: {
-    color: TOPBAR_COLOR,
-  },
-  title: {
-    color: TEXT_COLOR,
-  },
-  backButton: {
-    color: TEXT_COLOR,
-  },
-};
+screens.set(DECK_CARDS, DeckCards);
+screens.set(DECK_STATS, DeckStats);
 
-const stackConfig = { 
-  stack: {
-    children: [
-      {
-        component: {
-          id: 'decks',
-          name: DECKS,
-        }
-      },
-    ],
-    options: {
-      topBar: topBarOptions,
-      bottomTab: {
-        text: 'Tab 1',
-        testID: 'TEST_TAB',
-        icon: require('../logo.png'),
-      }
-    },
-  }
-};
-
-const cardsConfig = { 
-  stack: {
-    children: [
-      {
-        component: {
-          id: 'cards',
-          name: CARDS,
-        }
-      },
-    ],
-    options: {
-      topBar: topBarOptions,
-      bottomTab: {
-        text: 'Tab 2',
-        testID: 'TEST2_TAB',
-        icon: require('../logo.png'),
-      }
-    },
-  }
-};
-
-const bottomTabsConfig = { 
-  bottomTabs: {
-    id: 'ROOT',
-    children: [
-      stackConfig,
-      cardsConfig
-    ],
-  }
-};
-
-export const screensConfig = stackConfig;

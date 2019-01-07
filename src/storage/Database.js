@@ -7,7 +7,7 @@ SQLite.enablePromise(true);
 const DATABASE_NAME = 'memoCard.db';
 const DATABASE_LOCATION = 'default';
 
-class Database {
+export class Database {
   constructor(name, location) {
     this._name = name;
     this._location = location;
@@ -21,34 +21,56 @@ class Database {
       return Promise.resolve(this._database);
     }
 
-    if (this._database) {
-      return this._database.open().then(this.onDatabaseOpenSuccess);
-    }
-
     const db = await SQLite.openDatabase({ name: this._name, location: this._location });
-
     await initializeDatabase(db);
-
     this.onDatabaseOpenSuccess(db);
-    console.log('database opened');
+
     return db;
   }
 
-  async executeSql({ query, args }) {
+  async execute(executor, { query, args }) {
+    return executor.executeSql(query, args).then(this.processSqlExecutionResult);
+  }
+
+  async executeQuery(queryDescription) {
     if (!this._opened) {
       throw new Error('Impossible to execute sql. Database is not opened');
     }
 
-    return this._database.executeSql(query, args).then(this.extractRowItemsFromResult);
+    return this.execute(this._database, queryDescription);
   }
 
-  extractRowItemsFromResult = (results) => {
-    const { item, length } = results[0].rows;
+  processQueryExecutionResult = (results) => {
+    const singleResult = results[0];
+
+    if (singleResult.insertId !== undefined) {
+      return singleResult.insertId;
+    }
+
+    return this.extractRowItemsFromResult(singleResult);
+  }
+
+
+  processSqlExecutionResult = (results) => {
+    // console.log('result', results);
+
+    const singleResult = results[0].db ? results[1] : results[0];
+
+    if (singleResult.insertId !== undefined) {
+      return singleResult.insertId;
+    }
+
+    return this.extractRowItemsFromResult(singleResult);
+  }
+
+  extractRowItemsFromResult = (result) => {
+    const { item, length } = result.rows;
     const extractedRows = [];
 
     for (let i = 0; i < length; i++) {
       extractedRows.push(item(i));
     }
+
     return extractedRows;
   }
 
@@ -93,6 +115,4 @@ class Database {
   }
 }
 
-const database = new Database(DATABASE_NAME, DATABASE_LOCATION);
-
-export default database;
+export default Database;
