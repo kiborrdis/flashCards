@@ -52,15 +52,18 @@ class Preferences {
     if (!this.isLoaded()) {
       throw new Error('Cant setItem for preferences, preferences not loaded');
     }
+    console.log('preferences', key, value);
 
-    this.data = { ...data, [key]: value };
+    this.data = { ...this.data, [key]: value };
 
     this.save();
   }
 
   async save() {
+    console.log('save preferences', this.key, this.serialize());
+
     try {
-      await AsyncStorage.setItem(this.data, serialize());
+      await AsyncStorage.setItem(this.key, this.serialize());
     } catch (error) {
       console.error('Failed to save preferences', error);
     }

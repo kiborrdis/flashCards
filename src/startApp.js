@@ -1,7 +1,8 @@
 import { Linking } from 'react-native';
 import { Navigation } from "react-native-navigation";
 import { makeStackUsingChildScreenAndOptions, makeNewCardScreen, makeDecksScreen } from 'shared/navigation';
-import Preferences from 'shared/preferences';
+import Preferences from './preferences/Preferences';
+import { SHARE_DECK_ID } from 'shared/preferences';
 import screens from './screens';
 import AppStateWatcher from 'shared/utils/AppStateWatcher';
 import withRootContainers from './containers/withRootContainers';
@@ -14,7 +15,7 @@ const DATABASE_LOCATION = 'default';
 const APP_PREFERENCES_KEY = 'prefs';
 
 const defaultPreferences = {
-  shareDeckId: 1,
+  [SHARE_DECK_ID]: 1,
 };
 
 let appStateWatcher;
@@ -71,7 +72,7 @@ function registerListeners({ preferences, storage }) {
   AppStateWatcher.addEventListener('background', () => storage.close());
 
   Linking.addEventListener('url', ({ url }) => {
-    loadUrlHandlingAppScreen(url, preferences.getItem('shareDeckId'));
+    loadUrlHandlingAppScreen(url, preferences.getItem(SHARE_DECK_ID));
   });
 }
 
