@@ -1,30 +1,20 @@
 import React from 'react';
 import { Navigation } from 'react-native-navigation';
 import withStorageData from 'shared/containers/withStorageData';
+import withPreferences from 'shared/containers/withPreferences';
+import { SHARE_DECK_ID } from 'shared/preferences';
 import { getDeckStats, createTrial } from 'shared/storage/storageActions';
 import { makeTrialScreen } from 'shared/navigation'; 
 import DeckStats from '../components/DeckStats';
 
 class DeckStatsContainer extends React.Component {
-  componentDidUpdate() {
-    const { componentId, parentComponentId, loaded, data } = this.props;
+  constructor(props) {
+    super(props);
 
-    if (loaded) {
-      Navigation.mergeOptions(parentComponentId, {
-        topBar: {
-          title: {
-            text: data.name,
-          }
-        }
-      });
+    const { preferences, deckId } = props;
 
-      Navigation.mergeOptions(componentId, {
-        topBar: {
-          title: {
-            text: data.name,
-          }
-        }
-      });
+    this.state = {
+      sharedDeck: preferences.getItem(SHARE_DECK_ID) === deckId,
     }
   }
 
@@ -35,13 +25,26 @@ class DeckStatsContainer extends React.Component {
     Navigation.push(parentComponentId || componentId, makeTrialScreen(trialId));
   }
 
+  registerAsShareDeck = () => {
+    const { preferences, deckId } = this.props;
+
+    preferences.setItem(SHARE_DECK_ID, deckId);
+
+    this.setState({
+      sharedDeck: true,
+    });
+  }
+
   constructChildProps() {
     const { data, loaded, deckId } = this.props;
+    const { sharedDeck } = this.state;
 
     return {
       stats: data,
       loaded: this.props.loaded,
       deckId,
+      sharedDeck,
+      registerAsShareDeck: this.registerAsShareDeck,
       startNewTrial: this.startNewTrial,
     };
   }
@@ -53,6 +56,8 @@ class DeckStatsContainer extends React.Component {
   }
 }
 
-export default withStorageData(
-  (storage, { deckId }) => getDeckStats(storage, deckId)
-)(DeckStatsContainer);
+export default withPreferences(
+  withStorageData(
+    (storage, { deckId }) => getDeckStats(storage, deckId)
+  )(DeckStatsContainer)
+);

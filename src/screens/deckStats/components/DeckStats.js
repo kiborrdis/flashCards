@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, TouchableHighlight } from 'react-native';
 import ToolbarLayout from 'shared/components/ToolbarLayout';
 import LastTrial from './LastTrial';
 import LoadingWrapper from 'shared/components/LoadingWrapper';
@@ -7,7 +7,7 @@ import Label from 'shared/components/Label';
 
 // numberOfTrials
 // numberOfLearnedCards
-const DeckStats = ({ loaded, stats, deckId, startNewTrial }) => (
+const DeckStats = ({ loaded, stats, deckId, startNewTrial, sharedDeck, registerAsShareDeck }) => (
   <ToolbarLayout>
     <LoadingWrapper loading={!loaded}>
       {() => {
@@ -32,6 +32,15 @@ const DeckStats = ({ loaded, stats, deckId, startNewTrial }) => (
                 <Label size="big">{stats.numberOfTrials}</Label>
               </View>
             </View>
+            <View style={styles.sharedContainer}>
+              <TouchableHighlight onPress={registerAsShareDeck}>
+                <View style={[styles.sharedButton, ...(sharedDeck ? [styles.isShared] : [])]}>
+                  <Label>
+                    { sharedDeck ? 'Shared deck' : 'Make this deck shared' }
+                  </Label>
+                </View>   
+              </TouchableHighlight>
+            </View>
             <View style={styles.space}/>
             <View style={styles.footer}>
               <LastTrial deckId={deckId} />
@@ -50,6 +59,15 @@ const styles  = StyleSheet.create({
   title: {
     alignItems: 'flex-start',
     paddingBottom: 5,
+  },
+  sharedContainer: {
+    height: 30,
+  },
+  sharedButton: {
+    backgroundColor: 'red',
+  },
+  isShared: {
+    backgroundColor: 'green',
   },
   container: {
     paddingTop: 20,
