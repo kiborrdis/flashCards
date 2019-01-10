@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigation } from "react-native-navigation";
 import withStorageData from 'shared/containers/withStorageData';
-import { getDecks, createDeck } from 'shared/storage/storageActions';
+import { getDecks, createDeck, deleteDeck, updateDeck } from 'shared/storage/storageActions';
 import { makeDeckScreen, makePromptScreen } from 'memoCards/src/shared/navigation';
 import Decks from '../components/Decks';
 
@@ -30,6 +30,29 @@ class DecksContainer extends React.Component {
     updateData();
   }
 
+  removeDeck = async (deckId) => {
+    const { updateData, storage } = this.props;
+
+    deleteDeck(storage, deckId);
+
+    updateData();
+  }
+
+  openRenameDeckModal = (deckId) => {
+    Navigation.showModal(makePromptScreen({ 
+      title: 'Rename deck', 
+      onApply: (name) => this.renameDeck(deckId, name), 
+    }));
+  }
+
+  renameDeck = (deckId, name) => {
+    const { updateData, storage } = this.props;
+
+    updateDeck(storage, deckId, { name })
+
+    updateData();
+  }
+
   onItemPress = (deckId) => {
     Navigation.push(this.props.componentId, makeDeckScreen(deckId));
   }
@@ -40,6 +63,8 @@ class DecksContainer extends React.Component {
     return (
       <Decks
         onItemPress={this.onItemPress}
+        removeDeck={this.removeDeck}
+        renameDeck={this.openRenameDeckModal}
         loaded={loaded} 
         data={data} />
     );

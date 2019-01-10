@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigation } from "react-native-navigation";
 import withStorageData from 'shared/containers/withStorageData';
-import { getCardsFromDeck } from 'shared/storage/storageActions';
-import { makeNewCardScreen, makeTrialScreen } from 'shared/navigation';
+import { getCardsFromDeck, deleteCard } from 'shared/storage/storageActions';
+import { makeNewCardScreen, makeTrialScreen, makeEditCardScreen } from 'shared/navigation';
 import Cards from '../components/Cards';
 
 class CardsContainer extends React.Component {
@@ -23,9 +23,23 @@ class CardsContainer extends React.Component {
   }
 
   addCard = () => {
-    const { deckId, componentId, parentComponentId, updateData } = this.props;
+    const { deckId, componentId, parentComponentId } = this.props;
 
     Navigation.push(parentComponentId || componentId, makeNewCardScreen(deckId));
+  }
+
+  removeCard = (cardId) => {
+    const { updateData, storage } = this.props;
+
+    deleteCard(storage, cardId);
+
+    updateData();
+  }
+
+  editCard = (cardId) => {
+    const { componentId, parentComponentId } = this.props;
+
+    Navigation.push(parentComponentId || componentId, makeEditCardScreen(cardId));
   }
 
   render() {
@@ -36,6 +50,8 @@ class CardsContainer extends React.Component {
         loaded={loaded} 
         data={data} 
         addCard={this.addCard}
+        removeCard={this.removeCard}
+        editCard={this.editCard}
       />
     );
   }
