@@ -20,7 +20,7 @@ class CardScreen extends React.Component {
       return <EditCard cardId={cardId} componentId={componentId} />
     }
 
-    return <Card {...this.props} />
+    return <NewCard {...this.props} />
   }
 }
 
