@@ -18,6 +18,7 @@ class CardContainer extends React.Component {
     this.state = {
       frontside: props.defaultFrontside,
       backside: props.defaultBackside,
+      faceFrontside: true,
       index: 0,
     }
 
@@ -25,11 +26,17 @@ class CardContainer extends React.Component {
   }
 
   onRotatePress = () => {
-    this.cardRef.current.rotate();
+    this.handleRequestRotation();
   }
 
   onApplyPress = () => {
-    this.cardRef.current.swipeRight();
+    this.cardRef.current.handleSwipe('right');
+  }
+
+  handleRequestRotation = () => {
+    this.setState(({ faceFrontside }) =>({
+      faceFrontside: !faceFrontside
+    }));
   }
 
   handleSuggestionPress = (suggestion) => {
@@ -65,6 +72,7 @@ class CardContainer extends React.Component {
       frontside: '',
       backside: '',
       index: index + 1,
+      faceFrontside: true,
     }))
   }
 
@@ -73,17 +81,19 @@ class CardContainer extends React.Component {
   }
 
   render() {
-    const { frontside, backside, index } = this.state;
+    const { frontside, backside, faceFrontside, index } = this.state;
 
     return (
       <NewCard
         index={index}
+        faceFrontside={faceFrontside}
         frontside={frontside}
         backside={backside}
         cardRef={this.cardRef}
         onSuggestionPress={this.handleSuggestionPress}
         onRotatePress={this.onRotatePress}
         onApplyPress={this.onApplyPress}
+        onRequestRotation={this.handleRequestRotation}
         onSwipe={this.onSwipe}
         onChange={this.onChange}
       />

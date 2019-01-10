@@ -8,7 +8,9 @@ const NewCard = ({
   index, 
   frontside, 
   backside, 
+  faceFrontside,
   cardRef,
+  onRequestRotation,
   onSwipe, 
   onChange,
   onRotatePress,
@@ -22,17 +24,21 @@ const NewCard = ({
         <Button title="Apply" onPress={onApplyPress}/>
       </React.Fragment>
     }
-    topPanel={
-      <SuggestionsContainer onPress={onSuggestionPress} frontside={frontside} />
+    topPanel={(
+          faceFrontside 
+          ? null
+          : <SuggestionsContainer onPress={onSuggestionPress} frontside={frontside} />)
     }
   >
     <AnimatedCard 
       ref={cardRef}
+      faceFrontside={faceFrontside}
       frontside={frontside} 
       backside={backside} 
       onSwipeRight={onSwipe}
       onSwipeLeft={onSwipe}
-      onChange={onChange}
+      onSidesChange={onChange}
+      onRequestRotation={onRequestRotation}
       editable
       key={index}
     />

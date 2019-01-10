@@ -22,11 +22,11 @@ class TrialContainer extends React.Component {
   }
 
   onMatchCardPress = () => {
-    this.cardRef.current.swipeRight();
+    this.cardRef.current.handleSwipe('right');
   }
 
   onSkipCardPress = () => {
-    this.cardRef.current.swipeLeft(); 
+    this.cardRef.current.handleSwipe('left'); 
   }
 
   onSwipeRight = () => {
