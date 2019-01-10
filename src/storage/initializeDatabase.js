@@ -9,7 +9,8 @@ function createTables(transaction) {
       deckId INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       createdAt INTEGER DEFAULT 0,
-      updatedAt INTEGER DEFAULT 0
+      updatedAt INTEGER DEFAULT 0,
+      deletedAt INTEGER
     );
   `);
 
@@ -22,7 +23,8 @@ function createTables(transaction) {
       numberOfViews INTEGER DEFAULT 0,
       numberOfMatches INTEGER DEFAULT 0,
       createdAt INTEGER DEFAULT 0,
-      updatedAt INTEGER DEFAULT 0
+      updatedAt INTEGER DEFAULT 0,
+      deletedAt INTEGER
 
       REFERENCES Decks (deckId)
     );
