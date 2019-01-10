@@ -52,7 +52,7 @@ class TrialContainer extends React.Component {
   }
 
   toNextCard = () => {
-    if (this.props.data[1].length -1 > this.state.index) {
+    if (this.props.data.cards.length - 1 > this.state.index) {
       this.setState(({ index }) => ({ index: index + 1 }));
     } else {
       this.setState({ ended: true });
