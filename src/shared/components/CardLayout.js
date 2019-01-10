@@ -12,8 +12,9 @@ const CardLayout = ({
       <View style={styles.topPanel}>
         {topPanel}
       </View>
-
-     {children}
+      <View style={styles.content}>
+        {children}
+      </View>
 
       <View style={styles.controlPanel}>
         {controlPanel}
@@ -30,15 +31,19 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     backgroundColor: BACKGROUND_COLOR,
   },
+  content: {
+    padding: 20,
+  },
   topPanel: {
-    height: 50,
     width: '70%',
+    flex: 1,
   },
   controlPanel: {
     height: 50,
     width: '50%',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flex: 1,
   }
 });
 
