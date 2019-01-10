@@ -4,7 +4,7 @@ import StorageContext from 'shared/storage/storageContext';
 import { createCardInDeck } from 'shared/storage/storageActions';
 import NewCard from '../components/NewCard';
 
-class NewCardContainer extends React.Component {
+class CardContainer extends React.Component {
   static contextType = StorageContext;
 
   static defaultProps = {
@@ -32,26 +32,26 @@ class NewCardContainer extends React.Component {
     this.cardRef.current.swipeRight();
   }
 
-  onSwipe = () => {
-    const { closeOnCardCreation } = this.props;
+  shouldCreateNewCard() {
+    const { shouldCreateNewCard } = this.props;
 
-    this.createCard();
-
-    if (closeOnCardCreation) {
-      BackHandler.exitApp();
-
-      return;
+    if (shouldCreateNewCard) {
+      return shouldCreateNewCard();
     }
 
-    this.prepareToCreateNewCard();
+    return true;
   }
 
-  async createCard() {
-    const storage = this.context;
-    const { frontside, backside } = this.state;
-    const { deckId } = this.props;
+  onSwipe = () => {
+    const { onCardComplete } = this.props;
 
-    return createCardInDeck(storage, deckId, { frontside, backside });
+    if (onCardComplete) {
+      onCardComplete({ ...this.state });
+    }
+
+    if (this.shouldCreateNewCard()) {
+      this.prepareToCreateNewCard(); 
+    }
   }
 
   prepareToCreateNewCard() {
@@ -84,4 +84,4 @@ class NewCardContainer extends React.Component {
   }
 }
 
-export default NewCardContainer;
+export default CardContainer;

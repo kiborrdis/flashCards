@@ -4,7 +4,6 @@ export const CARD = 'memoCards.card';
 export const CARDS = 'memoCards.cards';
 export const DECKS = 'memoCards.decks';
 export const PROMPT = 'memoCards.promptModal';
-export const NEW_CARD = 'memoCards.newCard';
 export const TRIAL = 'memoCards.trial';
 export const DECK_CARDS = 'memoCards.deckCards';
 export const DECK_STATS = 'memoCards.deckStats';
@@ -29,10 +28,21 @@ export function makeDecksScreen() {
   };
 }
 
+export function makeEditCardScreen(cardId) {
+  return {
+    component: { 
+      name: CARD,
+      passProps: {
+        cardId,
+      },
+    },
+  };
+}
+
 export function makeNewCardScreen(deckId, { defaultFrontside, defaultBackside, closeOnCardCreation } = {}) {
   return {
     component: { 
-      name: NEW_CARD,
+      name: CARD,
       passProps: {
         deckId,
         defaultFrontside,
@@ -72,7 +82,7 @@ export function makeDeckScreen(deckId) {
               text: 'Stats',
               textColor: TEXT_COLOR,
               selectedTextColor: TEXT_COLOR,
-              icon: require('../logo.png'),
+              icon: require('../icons/stats.png'),
             }
           }
         }
@@ -89,7 +99,7 @@ export function makeDeckScreen(deckId) {
               text: 'List',
               textColor: TEXT_COLOR,
               selectedTextColor: TEXT_COLOR,
-              icon: require('../logo.png'),
+              icon: require('../icons/list.png'),
             }
           }
         }
