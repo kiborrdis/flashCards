@@ -32,6 +32,12 @@ class CardContainer extends React.Component {
     this.cardRef.current.swipeRight();
   }
 
+  handleSuggestionPress = (suggestion) => {
+    this.setState({
+      backside: this.state.backside ? `${this.state.backside}, ${suggestion}` : suggestion, 
+    });
+  }
+
   shouldCreateNewCard() {
     const { shouldCreateNewCard } = this.props;
 
@@ -75,6 +81,7 @@ class CardContainer extends React.Component {
         frontside={frontside}
         backside={backside}
         cardRef={this.cardRef}
+        onSuggestionPress={this.handleSuggestionPress}
         onRotatePress={this.onRotatePress}
         onApplyPress={this.onApplyPress}
         onSwipe={this.onSwipe}
