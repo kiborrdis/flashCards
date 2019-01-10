@@ -19,10 +19,15 @@ export const createTrial = createSingleQueryAction(creators.createTrial);
 export const getTrialCardsFromDeck = createSingleQueryAction(creators.getTrialCardsFromDeck);
 export const updateCardViewAndMatch = createSingleQueryAction(creators.updateCardViewAndMatch);
 export const updateTrialViewAndMatch = createSingleQueryAction(creators.updateTrialViewAndMatch);
+export const updateDeck = createSingleQueryAction(creators.updateDeck);
+export const updateCardSides = createSingleQueryAction(creators.updateCardSides);
+export const deleteDeck = createSingleQueryAction(creators.deleteDeck);
+export const deleteCard = createSingleQueryAction(creators.deleteCard);
 
 export const getLastTrialForDeck = createSingleQueryAction(creators.getLastTrialForDeck, extractSingleResult);
 export const getTrial = createSingleQueryAction(creators.getTrial, extractSingleResult);
 export const getDeckStats = createSingleQueryAction(creators.getDeckStats, extractSingleResult);
+export const getCard = createSingleQueryAction(creators.getCard, extractSingleResult);
 
 export const getTrialWithCards = createAction(async (executor, trialId) => {
   const { getTrial, getTrialCardsFromDeck } = creators; 
