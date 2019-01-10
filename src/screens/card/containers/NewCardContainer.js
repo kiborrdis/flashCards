@@ -30,8 +30,12 @@ class NewCardContainer extends React.Component {
   }
 
   render() {
+    const { defaultFrontside, defaultBackside } = this.props;
+
     return (
       <CardContainer
+        defaultFrontside={defaultFrontside}
+        defaultBackside={defaultBackside}
         shouldCreateNewCard={this.shouldCreateNewCard}
         onCardComplete={this.handleCardComplete}
       />
