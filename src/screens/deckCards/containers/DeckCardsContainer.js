@@ -31,7 +31,7 @@ class CardsContainer extends React.Component {
   removeCard = (cardId) => {
     const { updateData, storage } = this.props;
 
-    deleteCard(storage, cardId);
+    storage.performAction(deleteCard(cardId));;
 
     updateData();
   }
@@ -58,5 +58,5 @@ class CardsContainer extends React.Component {
 }
 
 export default withStorageData(
-  (storage, { deckId }) => getCardsFromDeck(storage, deckId)
+  ({ deckId }) => getCardsFromDeck(deckId)
 )(CardsContainer);

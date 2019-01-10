@@ -26,7 +26,7 @@ class NewCardContainer extends React.Component {
     const storage = this.context;
     const { deckId } = this.props;
 
-    return createCardInDeck(storage, deckId, { frontside, backside });
+    return storage.performAction(createCardInDeck(deckId, { frontside, backside }));;
   }
 
   render() {

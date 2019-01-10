@@ -25,7 +25,7 @@ class DecksContainer extends React.Component {
   addDeck = async (deckName) => {
     const { updateData, storage } = this.props;
 
-    await createDeck(storage, deckName);
+    await storage.performAction(createDeck(deckName));;
 
     updateData();
   }
@@ -33,7 +33,7 @@ class DecksContainer extends React.Component {
   removeDeck = async (deckId) => {
     const { updateData, storage } = this.props;
 
-    deleteDeck(storage, deckId);
+    storage.performAction(deleteDeck(deckId));;
 
     updateData();
   }
@@ -48,7 +48,7 @@ class DecksContainer extends React.Component {
   renameDeck = (deckId, name) => {
     const { updateData, storage } = this.props;
 
-    updateDeck(storage, deckId, { name })
+    storage.performAction(updateDeck(deckId, { name }));
 
     updateData();
   }

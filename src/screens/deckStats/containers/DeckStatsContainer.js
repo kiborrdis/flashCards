@@ -20,7 +20,7 @@ class DeckStatsContainer extends React.Component {
 
   startNewTrial = async () => {
     const { deckId, storage, componentId, parentComponentId } = this.props;
-    const trialId = await createTrial(storage, deckId);
+    const trialId = await storage.performAction(createTrial(deckId));;
     
     Navigation.push(parentComponentId || componentId, makeTrialScreen(trialId));
   }
@@ -58,6 +58,6 @@ class DeckStatsContainer extends React.Component {
 
 export default withPreferences(
   withStorageData(
-    (storage, { deckId }) => getDeckStats(storage, deckId)
+    ({ deckId }) => getDeckStats(deckId)
   )(DeckStatsContainer)
 );

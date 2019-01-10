@@ -3,8 +3,8 @@ import * as creators from './queryCreators'
 const copy = input => input;
 const extractSingleResult = data => data[0];
 
-const createAction = (action) => (storage, ...args) => {
-  return storage.performAction((executor) => action(executor, ...args));
+const createAction = (action) => (...args) => {
+  return (executor) => action(executor, ...args);
 }
 
 const createSingleQueryAction = (queryCreator, resultParser = copy) => createAction((executor, ...args) => {

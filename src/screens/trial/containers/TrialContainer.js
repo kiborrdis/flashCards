@@ -92,5 +92,5 @@ class TrialContainer extends React.Component {
 }
 
 export default withStorageData(
-  (storage, { trialId }) => getTrialWithCards(storage, trialId)
+  ({ trialId }) => getTrialWithCards(trialId)
 )(TrialContainer);

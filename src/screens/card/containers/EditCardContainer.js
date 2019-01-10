@@ -24,7 +24,7 @@ class EditCardContainer extends React.Component {
   async updateCard(cardSides) {
     const { cardId, storage } = this.props;
 
-    return updateCardSides(storage, cardId, cardSides);
+    return storage.performAction(updateCardSides(cardId, cardSides));;
   }
 
   render() {
@@ -46,5 +46,5 @@ class EditCardContainer extends React.Component {
 }
 
 export default withStorageData(
-  (storage, { cardId }) => getCard(storage, cardId)
+  ({ cardId }) => getCard(cardId)
 )(EditCardContainer);

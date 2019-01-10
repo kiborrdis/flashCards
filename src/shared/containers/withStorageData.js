@@ -39,8 +39,8 @@ const withStorageData = (rawActions) => (Component) => {
 
     updateData = () => {
       const storage = this.context;
-      const actionExecutionPromises = actions.map((actionFunc) => {
-        return actionFunc(storage, this.props);
+      const actionExecutionPromises = actions.map((actionCreator) => {
+        return storage.performAction(actionCreator(this.props));
       }, []);
 
       return Promise.all(actionExecutionPromises).then(results => {

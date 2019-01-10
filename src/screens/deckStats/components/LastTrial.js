@@ -68,5 +68,5 @@ const styles  = StyleSheet.create({
 });
 
 export default withStorageData(
-  (storage, { deckId }) => getLastTrialForDeck(storage, deckId)
+  ({ deckId }) => getLastTrialForDeck(deckId)
 )(LastTrial);
