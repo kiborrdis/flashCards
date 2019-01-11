@@ -9,5 +9,12 @@ module.exports = {
         ],
       }
     }
-  }
+  },
+  "rules": {
+    "no-use-before-define": "off",
+    "react/jsx-filename-extension": "off",
+    "react/require-default-props": "off",
+    "react/sort-comp": "off",
+    "global-require": "off",
+  },
 }
