@@ -3,7 +3,7 @@ import DeckCardsContainer from './containers/DeckCardsContainer';
 
 class DeckCardsScreen extends React.Component {
   render() {
-    return <DeckCardsContainer {...this.props} />
+    return <DeckCardsContainer {...this.props} />;
   }
 }
 

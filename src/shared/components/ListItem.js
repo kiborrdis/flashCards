@@ -1,14 +1,16 @@
 import React from 'react';
+import {
+  View, Text, StyleSheet, TouchableHighlight,
+} from 'react-native';
 import { SEPARATOR_COLOR } from '../styles';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import MenuButton from './MenuButton';
 
 const ListItem = ({ children, onPress, actions }) => (
   <TouchableHighlight onPress={(onPress)}>
     <View style={styles.container}>
       {children}
-      { 
-        actions && ( 
+      {
+        actions && (
           <View style={styles.actions}>
             <MenuButton
               items={actions}
@@ -21,7 +23,7 @@ const ListItem = ({ children, onPress, actions }) => (
   </TouchableHighlight>
 );
 
-const styles  = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',

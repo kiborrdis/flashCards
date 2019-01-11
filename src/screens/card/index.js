@@ -9,7 +9,7 @@ class CardScreen extends React.Component {
         visible: false,
         drawBehind: true,
         animate: false,
-      }
+      },
     };
   }
 
@@ -17,10 +17,10 @@ class CardScreen extends React.Component {
     const { cardId, componentId } = this.props;
 
     if (cardId) {
-      return <EditCard cardId={cardId} componentId={componentId} />
+      return <EditCard cardId={cardId} componentId={componentId} />;
     }
 
-    return <NewCard {...this.props} />
+    return <NewCard {...this.props} />;
   }
 }
 

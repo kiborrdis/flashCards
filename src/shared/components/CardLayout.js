@@ -8,19 +8,19 @@ const CardLayout = ({
   children,
   error,
 }) => (
-    <View style={styles.container}>
-      <View style={styles.topPanel}>
-        {topPanel}
-      </View>
-      <View style={styles.content}>
-        {children}
-      </View>
-
-      <View style={styles.controlPanel}>
-        {controlPanel}
-      </View>
+  <View style={styles.container}>
+    <View style={styles.topPanel}>
+      {topPanel}
     </View>
-)
+    <View style={styles.content}>
+      {children}
+    </View>
+
+    <View style={styles.controlPanel}>
+      {controlPanel}
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     flex: 1,
-  }
+  },
 });
 
 export default CardLayout;

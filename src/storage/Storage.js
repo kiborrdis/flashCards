@@ -4,12 +4,12 @@ class Storage {
     this._statusListeners = [];
   }
 
-  addStorageStatusListener (callback) {
+  addStorageStatusListener(callback) {
     this._statusListeners.push(callback);
 
     return () => {
       this._statusListeners.splice(this._statusListeners.indexOf(callback), 1);
-    }
+    };
   }
 
   open() {

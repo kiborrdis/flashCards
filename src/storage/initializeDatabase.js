@@ -1,8 +1,8 @@
 function createTables(transaction) {
-    // transaction.executeSql(`DROP TABLE IF EXISTS Decks;`);
-    // transaction.executeSql(`DROP TABLE IF EXISTS Cards;`);
-    // transaction.executeSql(`DROP TABLE IF EXISTS Trials;`);
-    // transaction.executeSql(`DROP TABLE IF EXISTS Version;`);
+  // transaction.executeSql(`DROP TABLE IF EXISTS Decks;`);
+  // transaction.executeSql(`DROP TABLE IF EXISTS Cards;`);
+  // transaction.executeSql(`DROP TABLE IF EXISTS Trials;`);
+  // transaction.executeSql(`DROP TABLE IF EXISTS Version;`);
 
   transaction.executeSql(`
     CREATE TABLE IF NOT EXISTS Decks( 

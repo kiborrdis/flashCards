@@ -13,10 +13,13 @@ class InteractionHandler extends React.Component {
   }
 
   handleResponderGrant = (e) => {
-    this._currentResponderAction = { type: 'tap', initialPosition: { 
-      x: e.nativeEvent.pageX,
-      y: e.nativeEvent.pageY,
-    }};
+    this._currentResponderAction = {
+      type: 'tap',
+      initialPosition: {
+        x: e.nativeEvent.pageX,
+        y: e.nativeEvent.pageY,
+      },
+    };
   }
 
   handleResponderMove = (event) => {
@@ -26,8 +29,8 @@ class InteractionHandler extends React.Component {
       this._currentResponderAction.type = 'move';
     }
 
-    onMove({ 
-      ...this._currentResponderAction, 
+    onMove({
+      ...this._currentResponderAction,
       offset: this.calculateOffsetFromNativeEvent(event.nativeEvent),
       swipe: this.isSwipeBasedOnNativeEvent(event.nativeEvent),
     });
@@ -37,7 +40,7 @@ class InteractionHandler extends React.Component {
     return {
       x: nativeEvent.pageX - this._currentResponderAction.initialPosition.x,
       y: nativeEvent.pageY - this._currentResponderAction.initialPosition.y,
-    }
+    };
   }
 
   handleResponderRelease = (event) => {
@@ -63,7 +66,7 @@ class InteractionHandler extends React.Component {
   isSwipeBasedOnNativeEvent(nativeEvent) {
     const offset = this.calculateOffsetFromNativeEvent(nativeEvent);
 
-    return Math.abs(offset.x) > SWIPE_CALLBACK_THRESHOLD
+    return Math.abs(offset.x) > SWIPE_CALLBACK_THRESHOLD;
   }
 
   render() {

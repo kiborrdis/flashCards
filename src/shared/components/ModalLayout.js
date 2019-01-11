@@ -1,14 +1,18 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {
+  View, Text, Button, StyleSheet,
+} from 'react-native';
 
-const ModalLayout = ({ onApply, onCancel, title, children }) => (
+const ModalLayout = ({
+  onApply, onCancel, title, children,
+}) => (
   <View style={styles.container}>
     <View style={styles.content}>
       <Text style={styles.title}>{title}</Text>
 
       {children}
 
-      <View style={styles.footer} >
+      <View style={styles.footer}>
         <Button onPress={onCancel} color="#888" title="Cancel" />
         <Button onPress={onApply} title="Apply" />
       </View>
@@ -16,7 +20,7 @@ const ModalLayout = ({ onApply, onCancel, title, children }) => (
   </View>
 );
 
-const styles  = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
@@ -37,7 +41,7 @@ const styles  = StyleSheet.create({
     marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+  },
 });
 
 export default ModalLayout;

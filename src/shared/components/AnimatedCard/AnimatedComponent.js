@@ -1,5 +1,7 @@
 import React from 'react';
-import { TextInput, View, Text, Easing, StyleSheet, TouchableWithoutFeedback, Animated } from 'react-native';
+import {
+  TextInput, View, Text, Easing, StyleSheet, TouchableWithoutFeedback, Animated,
+} from 'react-native';
 import { FadeInAnimation, TransitionAnimation } from './Animation';
 
 class AnimatedComponent extends React.Component {
@@ -59,22 +61,25 @@ class AnimatedComponent extends React.Component {
   }
 
   constructAnimatedStyle() {
-    const { opacity, scale, rotationY, offsetX, offsetY } = this.state;
+    const {
+      opacity, scale, rotationY, offsetX, offsetY,
+    } = this.state;
 
-    return { 
-      opacity: opacity, 
+    return {
+      opacity,
       transform: [
-        { scaleX: scale }, 
+        { scaleX: scale },
         { scaleY: scale },
-        { rotateY: rotationY.interpolate({
+        {
+          rotateY: rotationY.interpolate({
             inputRange: [0, 360],
-            outputRange: ['0deg', '360deg']
-          }) 
+            outputRange: ['0deg', '360deg'],
+          }),
         },
         { translateX: offsetX },
         { translateY: offsetY },
       ],
-    }
+    };
   }
 
   render() {
@@ -84,7 +89,7 @@ class AnimatedComponent extends React.Component {
       <Animated.View style={this.constructAnimatedStyle()}>
         {children}
       </Animated.View>
-    )
+    );
   }
 }
 

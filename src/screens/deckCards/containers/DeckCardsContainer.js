@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigation } from "react-native-navigation";
+import { Navigation } from 'react-native-navigation';
 import withStorageData from 'shared/containers/withStorageData';
 import { getCardsFromDeck, deleteCard } from 'shared/storage/storageActions';
 import { makeNewCardScreen, makeTrialScreen, makeEditCardScreen } from 'shared/navigation';
@@ -31,7 +31,7 @@ class CardsContainer extends React.Component {
   removeCard = (cardId) => {
     const { updateData, storage } = this.props;
 
-    storage.performAction(deleteCard(cardId));;
+    storage.performAction(deleteCard(cardId));
 
     updateData();
   }
@@ -47,8 +47,8 @@ class CardsContainer extends React.Component {
 
     return (
       <Cards
-        loaded={loaded} 
-        data={data} 
+        loaded={loaded}
+        data={data}
         addCard={this.addCard}
         removeCard={this.removeCard}
         editCard={this.editCard}
@@ -58,5 +58,5 @@ class CardsContainer extends React.Component {
 }
 
 export default withStorageData(
-  ({ deckId }) => getCardsFromDeck(deckId)
+  ({ deckId }) => getCardsFromDeck(deckId),
 )(CardsContainer);

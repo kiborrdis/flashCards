@@ -1,7 +1,7 @@
-import SQLite  from 'react-native-sqlite-storage';
+import SQLite from 'react-native-sqlite-storage';
 import initializeDatabase from './initializeDatabase';
 
-SQLite.DEBUG(true);
+// SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
 const DATABASE_NAME = 'memoCard.db';
@@ -102,12 +102,12 @@ export class Database {
     this._statusListeners.forEach(listener => listener(value));
   }
 
-  addDatabaseStatusListener (callback) {
+  addDatabaseStatusListener(callback) {
     this._statusListeners.push(callback);
 
     return () => {
       this._statusListeners.splice(this._statusListeners.indexOf(callback), 1);
-    }
+    };
   }
 
   isOpened() {

@@ -9,14 +9,14 @@ export const DECK_CARDS = 'memoCards.deckCards';
 export const DECK_STATS = 'memoCards.deckStats';
 
 export function makeStackUsingChildScreenAndOptions(rootChild, options) {
-  return { 
+  return {
     stack: {
       children: [
         rootChild,
       ],
       options,
-    }
-  }
+    },
+  };
 }
 
 export function makeDecksScreen() {
@@ -24,13 +24,13 @@ export function makeDecksScreen() {
     component: {
       id: 'decks',
       name: DECKS,
-    }
+    },
   };
 }
 
 export function makeEditCardScreen(cardId) {
   return {
-    component: { 
+    component: {
       name: CARD,
       passProps: {
         cardId,
@@ -41,7 +41,7 @@ export function makeEditCardScreen(cardId) {
 
 export function makeNewCardScreen(deckId, { defaultFrontside, defaultBackside, closeOnCardCreation } = {}) {
   return {
-    component: { 
+    component: {
       name: CARD,
       passProps: {
         deckId,
@@ -55,14 +55,14 @@ export function makeNewCardScreen(deckId, { defaultFrontside, defaultBackside, c
 
 export function makeCardsOfDeckScreen(deckId) {
   return {
-    component: { 
+    component: {
       name: CARDS,
       passProps: {
         deckId,
       },
     },
   };
-};
+}
 
 export function makeDeckScreen(deckId) {
   const parentComponentId = `deck:${deckId}`;
@@ -73,8 +73,8 @@ export function makeDeckScreen(deckId) {
       {
         component: {
           name: DECK_STATS,
-          passProps: { 
-            deckId, 
+          passProps: {
+            deckId,
             parentComponentId,
           },
           options: {
@@ -83,15 +83,15 @@ export function makeDeckScreen(deckId) {
               textColor: TEXT_COLOR,
               selectedTextColor: TEXT_COLOR,
               icon: require('../icons/stats.png'),
-            }
-          }
-        }
+            },
+          },
+        },
       },
       {
         component: {
           name: DECK_CARDS,
-          passProps: { 
-            deckId, 
+          passProps: {
+            deckId,
             parentComponentId,
           },
           options: {
@@ -100,9 +100,9 @@ export function makeDeckScreen(deckId) {
               textColor: TEXT_COLOR,
               selectedTextColor: TEXT_COLOR,
               icon: require('../icons/list.png'),
-            }
-          }
-        }
+            },
+          },
+        },
       },
     ],
     options: {
@@ -119,8 +119,8 @@ export function makeDeckScreen(deckId) {
             icon: require('../icons/plus.png'),
           },
         ],
-      }
-    }
+      },
+    },
   };
 
   return {
@@ -130,7 +130,7 @@ export function makeDeckScreen(deckId) {
 
 export function makePromptScreen({ title, onApply }) {
   return {
-    component: { 
+    component: {
       name: PROMPT,
       passProps: {
         title,
@@ -138,18 +138,15 @@ export function makePromptScreen({ title, onApply }) {
       },
     },
   };
-};
+}
 
 export function makeTrialScreen(trialId) {
   return {
-    component: { 
+    component: {
       name: TRIAL,
       passProps: {
         trialId,
       },
     },
   };
-};
-
-
-
+}

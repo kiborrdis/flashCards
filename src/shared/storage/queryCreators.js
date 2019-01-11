@@ -23,7 +23,7 @@ export function createDeck(name) {
 
 export function getCard(cardId) {
   return {
-    query: `SELECT cardId, frontside, backside FROM Cards WHERE cardId = ?`,
+    query: 'SELECT cardId, frontside, backside FROM Cards WHERE cardId = ?',
     args: [cardId],
   };
 }
@@ -56,8 +56,8 @@ export function getDecks() {
       WHERE
         deletedAt IS NULL 
     `,
-  }
-};
+  };
+}
 
 export function getDeckStats(deckId) {
   return {
@@ -72,8 +72,8 @@ export function getDeckStats(deckId) {
       WHERE
         deckId = ?
     `,
-    args: [deckId]
-  }
+    args: [deckId],
+  };
 }
 
 export function createTrial(deckId, type = 'default', numberOfCards = 20) {
@@ -119,7 +119,7 @@ export function getTrialCardsFromDeck(deckId, numberOfCards) {
     `,
     args: [deckId, numberOfCards],
   };
-};
+}
 
 export function getLastTrialForDeck(deckId) {
   return {
@@ -161,7 +161,7 @@ export function updateCardViewAndMatch(cardId, match) {
       UPDATE Cards
       SET
         numberOfViews = numberOfViews + 1
-        ${ match ? `,numberOfMatches = numberOfMatches + 1` : ''}
+        ${match ? ',numberOfMatches = numberOfMatches + 1' : ''}
       WHERE
         cardId = ?
     `,
@@ -193,7 +193,7 @@ export function deleteDeck(deckId) {
         deckId = ?
     `,
     args: [new Date().getTime(), deckId],
-  }
+  };
 }
 
 export function deleteCard(cardId) {
@@ -206,7 +206,7 @@ export function deleteCard(cardId) {
         cardId = ?
     `,
     args: [new Date().getTime(), cardId],
-  }
+  };
 }
 
 export function updateDeck(deckId, { name }) {

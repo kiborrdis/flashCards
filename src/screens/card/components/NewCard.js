@@ -1,40 +1,42 @@
 import React from 'react';
 import CardLayout from 'shared/components/CardLayout';
 import AnimatedCard from 'shared/components/AnimatedCard';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import {
+  View, Text, Button, StyleSheet,
+} from 'react-native';
 import SuggestionsContainer from '../containers/SuggestionsContainer';
 
-const NewCard = ({ 
-  index, 
-  frontside, 
-  backside, 
+const NewCard = ({
+  index,
+  frontside,
+  backside,
   faceFrontside,
   cardRef,
   onRequestRotation,
-  onSwipe, 
+  onSwipe,
   onChange,
   onRotatePress,
   onApplyPress,
-  onSuggestionPress, 
+  onSuggestionPress,
 }) => (
   <CardLayout
-    controlPanel={
+    controlPanel={(
       <React.Fragment>
-        <Button title="Rotate" onPress={onRotatePress}/>
-        <Button title="Apply" onPress={onApplyPress}/>
+        <Button title="Rotate" onPress={onRotatePress} />
+        <Button title="Apply" onPress={onApplyPress} />
       </React.Fragment>
-    }
+)}
     topPanel={(
-          faceFrontside 
-          ? null
-          : <SuggestionsContainer onPress={onSuggestionPress} frontside={frontside} />)
+          faceFrontside
+            ? null
+            : <SuggestionsContainer onPress={onSuggestionPress} frontside={frontside} />)
     }
   >
-    <AnimatedCard 
+    <AnimatedCard
       ref={cardRef}
       faceFrontside={faceFrontside}
-      frontside={frontside} 
-      backside={backside} 
+      frontside={frontside}
+      backside={backside}
       onSwipeRight={onSwipe}
       onSwipeLeft={onSwipe}
       onSidesChange={onChange}
@@ -43,6 +45,6 @@ const NewCard = ({
       key={index}
     />
   </CardLayout>
-)
+);
 
 export default NewCard;

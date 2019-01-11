@@ -7,7 +7,7 @@ const LoadingWrapper = ({ loading, children }) => {
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="black" />
       </View>
-    )
+    );
   }
 
   return children();
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
-  }
+  },
 });
 
 export default LoadingWrapper;

@@ -1,2 +1,2 @@
 export { default as PreferencesContext } from './preferencesContext';
-export * from './preferencesKeys'; 
+export * from './preferencesKeys';

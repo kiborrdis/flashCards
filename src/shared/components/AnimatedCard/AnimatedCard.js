@@ -8,7 +8,7 @@ import Card from './Card';
 
 class AnimatedCard extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       faceFrontside: props.faceFrontside !== undefined ? props.faceFrontside : true,
@@ -43,15 +43,15 @@ class AnimatedCard extends React.Component {
 
   rotate() {
     this.animationRef.current.runAnimation(new RotateAnimation(
-      () => { 
-        this.setState(({ faceFrontside }) => ({ faceFrontside: !faceFrontside })); 
-      }
+      () => {
+        this.setState(({ faceFrontside }) => ({ faceFrontside: !faceFrontside }));
+      },
     ));
   }
 
   handleMove = ({ offset, swipe }) => {
-    this.animationRef.current.runAnimation(new TransitionAnimation({ 
-      offsetX: offset.x, 
+    this.animationRef.current.runAnimation(new TransitionAnimation({
+      offsetX: offset.x,
       scale: swipe ? 0.7 : 1,
     }, 50));
   }
@@ -62,7 +62,7 @@ class AnimatedCard extends React.Component {
 
   handleSwipe = (direction) => {
     this.animationRef.current.runAnimation(new TransitionAnimation({
-      offsetX: direction === 'left' ? -1000 : 1000, 
+      offsetX: direction === 'left' ? -1000 : 1000,
     }, 150)).then(() => {
       const { onSwipeLeft, onSwipeRight } = this.props;
 
@@ -96,21 +96,23 @@ class AnimatedCard extends React.Component {
         onMoveEnd={this.handleMoveEnd}
         onTap={this.handleTap}
         onSwipe={this.handleSwipe}
-       >
+      >
         <AnimatedComponent ref={this.animationRef} scale={scale} offset={offset}>
-          <Card 
+          <Card
             value={faceFrontside ? frontside : backside}
             faceBackside={!faceFrontside}
-            content={editable && (value => <TextInput
-                          value={value}
-                          alt={!faceFrontside}
-                          onChangeText={this.handleSideChange}
-                          onEditStop={this.handleEditStop}
-                        />)}
+            content={editable && (value => (
+              <TextInput
+                value={value}
+                alt={!faceFrontside}
+                onChangeText={this.handleSideChange}
+                onEditStop={this.handleEditStop}
+              />
+            ))}
           />
         </AnimatedComponent>
       </InteractionHandler>
-    )
+    );
   }
 }
 

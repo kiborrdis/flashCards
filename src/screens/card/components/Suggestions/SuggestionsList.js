@@ -13,9 +13,9 @@ const SuggestionsList = ({ suggestions = [], onPress }) => {
       {
         suggestions.map((suggestion, index) => (
           <React.Fragment>
-            <SuggestionsItem 
+            <SuggestionsItem
               key={suggestion}
-              label={`${suggestion}${index === suggestions.length - 1 ? '' : ', '}`} 
+              label={`${suggestion}${index === suggestions.length - 1 ? '' : ', '}`}
               index={index}
               onPress={onPress}
             />
@@ -23,15 +23,15 @@ const SuggestionsList = ({ suggestions = [], onPress }) => {
         ))
       }
     </View>
-  )
-}
+  );
+};
 
 
 const styles = {
   list: {
     flexDirection: 'row',
-    flexWrap: 'wrap',   
-  }
+    flexWrap: 'wrap',
+  },
 };
 
 export default SuggestionsList;

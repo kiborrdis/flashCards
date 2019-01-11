@@ -44,7 +44,7 @@ class AppStateWatcher {
 
     this.listeners = {
       ...this.listeners,
-      [type]: [ ...typeListeners, handler ]
+      [type]: [...typeListeners, handler],
     };
   }
 
@@ -55,7 +55,7 @@ class AppStateWatcher {
     this.listeners = {
       ...this.listeners,
       [type]: newTypeListeners,
-    }
+    };
   }
 
   emitEvent(type) {

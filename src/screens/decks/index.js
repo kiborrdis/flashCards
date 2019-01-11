@@ -7,20 +7,20 @@ class DecksScreen extends React.Component {
     return {
       topBar: {
         title: {
-          text: 'Decks'
+          text: 'Decks',
         },
         rightButtons: [
           {
             id: 'addDeckButton',
             icon: require('shared/icons/plus.png'),
-          }
-        ]
-      }
+          },
+        ],
+      },
     };
   }
 
   render() {
-    return <Decks {...this.props} />
+    return <Decks {...this.props} />;
   }
 }
 

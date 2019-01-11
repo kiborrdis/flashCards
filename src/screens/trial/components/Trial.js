@@ -2,24 +2,28 @@ import React from 'react';
 import CardLayout from 'shared/components/CardLayout';
 import AnimatedCard from 'shared/components/AnimatedCard';
 import Label from 'shared/components/Label';
-import { TouchableHighlight, View, Text, Button, StyleSheet, Image } from 'react-native';
+import {
+  TouchableHighlight, View, Text, Button, StyleSheet, Image,
+} from 'react-native';
 
 const Trial = ({
-  ended, 
-  index, 
-  frontside = 'a', 
-  backside = 'b', 
+  ended,
+  index,
+  frontside = 'a',
+  backside = 'b',
   cardRef,
   onSwipeRight,
-  onSwipeLeft, 
+  onSwipeLeft,
   onRotatePress,
   onMatchCardPress,
-  onSkipCardPress, 
+  onSkipCardPress,
 }) => {
   if (ended) {
-    return (<CardLayout>
-      <Label>Trial has ended</Label>
-    </CardLayout>)
+    return (
+      <CardLayout>
+        <Label>Trial has ended</Label>
+      </CardLayout>
+    );
   }
 
   return (
@@ -27,26 +31,26 @@ const Trial = ({
       topPanel={
         <Text>{index}</Text>
       }
-      controlPanel={
+      controlPanel={(
         <React.Fragment>
-          <Button title="Idont" onPress={onSkipCardPress}/>
+          <Button title="Idont" onPress={onSkipCardPress} />
           <TouchableHighlight onPress={onRotatePress}>
             <Image source={require('shared/icons/rotate.png')} />
           </TouchableHighlight>
-          <Button title="Iknow" onPress={onMatchCardPress}/>
+          <Button title="Iknow" onPress={onMatchCardPress} />
         </React.Fragment>
-      }
+)}
     >
-      <AnimatedCard 
+      <AnimatedCard
         ref={cardRef}
-        frontside={frontside} 
-        backside={backside} 
+        frontside={frontside}
+        backside={backside}
         onSwipeRight={onSwipeRight}
         onSwipeLeft={onSwipeLeft}
         key={index}
       />
     </CardLayout>
-  )
-}
+  );
+};
 
 export default Trial;

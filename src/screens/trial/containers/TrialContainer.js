@@ -26,7 +26,7 @@ class TrialContainer extends React.Component {
   }
 
   onSkipCardPress = () => {
-    this.cardRef.current.handleSwipe('left'); 
+    this.cardRef.current.handleSwipe('left');
   }
 
   onSwipeRight = () => {
@@ -84,7 +84,7 @@ class TrialContainer extends React.Component {
         onMatchCardPress={this.onMatchCardPress}
         onSkipCardPress={this.onSkipCardPress}
         onSwipeRight={this.onSwipeRight}
-        onSwipeLeft = {this.onSwipeLeft}
+        onSwipeLeft={this.onSwipeLeft}
         onChange={this.onChange}
       />
     );
@@ -92,5 +92,5 @@ class TrialContainer extends React.Component {
 }
 
 export default withStorageData(
-  ({ trialId }) => getTrialWithCards(trialId)
+  ({ trialId }) => getTrialWithCards(trialId),
 )(TrialContainer);

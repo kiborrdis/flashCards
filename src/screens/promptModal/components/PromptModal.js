@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, TextInput, Modal, Alert, TouchableHighlight, Button } from 'react-native';
+import {
+  StyleSheet, View, Text, TextInput, Modal, Alert, TouchableHighlight, Button,
+} from 'react-native';
 import ModalLayout from 'memoCards/src/shared/components/ModalLayout';
 
 class PromptModal extends React.Component {
@@ -44,7 +46,9 @@ class PromptModal extends React.Component {
     return (
       <ModalLayout onApply={this.onApply} onCancel={this.onCancel} title={title}>
         <TextInput
-          style={{height: 40, borderColor: 'transparent', borderBottomColor: '#ccc', borderWidth: 1}}
+          style={{
+            height: 40, borderColor: 'transparent', borderBottomColor: '#ccc', borderWidth: 1,
+          }}
           onChangeText={this.onChangeText}
           value={inputValue}
         />

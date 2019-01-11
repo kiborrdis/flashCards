@@ -11,7 +11,7 @@ const Menu = ({ children }) => (
 const styles = StyleSheet.create({
   menu: {
     backgroundColor: TOPBAR_COLOR,
-  }
-})
+  },
+});
 
 export default Menu;

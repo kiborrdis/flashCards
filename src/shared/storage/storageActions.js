@@ -1,15 +1,11 @@
-import * as creators from './queryCreators'
+import * as creators from './queryCreators';
 
 const copy = input => input;
 const extractSingleResult = data => data[0];
 
-const createAction = (action) => (...args) => {
-  return (executor) => action(executor, ...args);
-}
+const createAction = action => (...args) => executor => action(executor, ...args);
 
-const createSingleQueryAction = (queryCreator, resultParser = copy) => createAction((executor, ...args) => {
-  return executor.executeQuery(queryCreator(...args)).then(resultParser);
-});
+const createSingleQueryAction = (queryCreator, resultParser = copy) => createAction((executor, ...args) => executor.executeQuery(queryCreator(...args)).then(resultParser));
 
 export const createCardInDeck = createSingleQueryAction(creators.createCardInDeck);
 export const createDeck = createSingleQueryAction(creators.createDeck);
@@ -30,7 +26,7 @@ export const getDeckStats = createSingleQueryAction(creators.getDeckStats, extra
 export const getCard = createSingleQueryAction(creators.getCard, extractSingleResult);
 
 export const getTrialWithCards = createAction(async (executor, trialId) => {
-  const { getTrial, getTrialCardsFromDeck } = creators; 
+  const { getTrial, getTrialCardsFromDeck } = creators;
   const trial = await executor.executeQuery(getTrial(trialId)).then(extractSingleResult);
   const cards = await executor.executeQuery(getTrialCardsFromDeck(trial.deckId, trial.numberOfCards));
 
@@ -38,4 +34,4 @@ export const getTrialWithCards = createAction(async (executor, trialId) => {
     ...trial,
     cards,
   };
-})
+});

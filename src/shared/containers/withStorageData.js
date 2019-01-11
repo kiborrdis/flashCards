@@ -1,8 +1,8 @@
 import React from 'react';
-import { Navigation } from "react-native-navigation";
+import { Navigation } from 'react-native-navigation';
 import storageContext from '../storage/storageContext';
 
-const withStorageData = (rawActions) => (Component) => {
+const withStorageData = rawActions => (Component) => {
   let actions = rawActions;
 
   if (!Array.isArray(rawActions)) {
@@ -39,11 +39,9 @@ const withStorageData = (rawActions) => (Component) => {
 
     updateData = () => {
       const storage = this.context;
-      const actionExecutionPromises = actions.map((actionCreator) => {
-        return storage.performAction(actionCreator(this.props));
-      }, []);
+      const actionExecutionPromises = actions.map(actionCreator => storage.performAction(actionCreator(this.props)), []);
 
-      return Promise.all(actionExecutionPromises).then(results => {
+      return Promise.all(actionExecutionPromises).then((results) => {
         if (!this.unmounted) {
           this.setState({
             data: [...results],
@@ -63,7 +61,7 @@ const withStorageData = (rawActions) => (Component) => {
 
       return {
         data: dataForComponent,
-        loaded: loaded,
+        loaded,
         updateData: this.updateData,
         storage: this.context,
         ...this.props,
@@ -76,6 +74,6 @@ const withStorageData = (rawActions) => (Component) => {
   }
 
   return WithStorageData;
-}
+};
 
 export default withStorageData;

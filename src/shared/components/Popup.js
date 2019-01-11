@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import {
+  View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Dimensions,
+} from 'react-native';
 
 class Popup extends React.Component {
   static defaultProps = {
@@ -7,10 +9,11 @@ class Popup extends React.Component {
   }
 
   state = {
-    contentWidth: 0
+    contentWidth: 0,
   }
 
   targetRef = React.createRef();
+
   targetOffsetRelativeToWindow = {
     x: 0,
     y: 0,
@@ -63,8 +66,8 @@ class Popup extends React.Component {
     console.log('correction', desiredXPosition, deviceWidth, contentWidth);
 
     const correctedXPosition = Math.max(0, Math.min(desiredXPosition, deviceWidth - contentWidth));
-    console.log('end correction', correctedXPosition)
-    return correctedXPosition;  
+    console.log('end correction', correctedXPosition);
+    return correctedXPosition;
   }
 
   getPopupPositionStyles = () => {
@@ -73,32 +76,35 @@ class Popup extends React.Component {
     return {
       left: this.correctXPosition(desiredPosition.x),
       top: desiredPosition.y,
-    }
+    };
   }
 
   renderModal() {
-    const { visible, close, position, content } = this.props;
+    const {
+      visible, close, position, content,
+    } = this.props;
 
     if (!visible) {
       return null;
     }
 
-    return <Modal
-      transparent
-      animationType="none"
-      visible={visible}
-      onRequestClose={close}
-    >
-      <View style={[styles.popup, this.getPopupPositionStyles()]} onLayout={this.onContentLayout}>
-        { visible ? content() : null }
-      </View>
-      <View style={styles.popupOverlay}>
-        <TouchableWithoutFeedback onPress={close}>
-          <View style={styles.overlayTouchable}>
-          </View>
-        </TouchableWithoutFeedback>
-      </View>
-    </Modal>;
+    return (
+      <Modal
+        transparent
+        animationType="none"
+        visible={visible}
+        onRequestClose={close}
+      >
+        <View style={[styles.popup, this.getPopupPositionStyles()]} onLayout={this.onContentLayout}>
+          { visible ? content() : null }
+        </View>
+        <View style={styles.popupOverlay}>
+          <TouchableWithoutFeedback onPress={close}>
+            <View style={styles.overlayTouchable} />
+          </TouchableWithoutFeedback>
+        </View>
+      </Modal>
+    );
   }
 
   render() {
@@ -111,7 +117,7 @@ class Popup extends React.Component {
       </React.Fragment>
     );
   }
-};
+}
 
 const styles = StyleSheet.create({
   popupOverlay: {
@@ -129,7 +135,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     shadowColor: 'black',
     shadowRadius: 50,
-    shadowOpacity: 0.5
+    shadowOpacity: 0.5,
   },
 
 });

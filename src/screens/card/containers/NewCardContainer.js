@@ -13,20 +13,16 @@ class NewCardContainer extends React.Component {
 
     if (this.props.closeOnCardCreation) {
       BackHandler.exitApp();
-
-      return;
     }
   }
 
-  shouldCreateNewCard = () => {
-    return !this.props.closeOnCardCreation;
-  }
+  shouldCreateNewCard = () => !this.props.closeOnCardCreation
 
   async createCard({ frontside, backside }) {
     const storage = this.context;
     const { deckId } = this.props;
 
-    return storage.performAction(createCardInDeck(deckId, { frontside, backside }));;
+    return storage.performAction(createCardInDeck(deckId, { frontside, backside }));
   }
 
   render() {

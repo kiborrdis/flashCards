@@ -4,7 +4,7 @@ import withStorageData from 'shared/containers/withStorageData';
 import withPreferences from 'shared/containers/withPreferences';
 import { SHARE_DECK_ID } from 'shared/preferences';
 import { getDeckStats, createTrial } from 'shared/storage/storageActions';
-import { makeTrialScreen } from 'shared/navigation'; 
+import { makeTrialScreen } from 'shared/navigation';
 import DeckStats from '../components/DeckStats';
 
 class DeckStatsContainer extends React.Component {
@@ -15,13 +15,15 @@ class DeckStatsContainer extends React.Component {
 
     this.state = {
       sharedDeck: preferences.getItem(SHARE_DECK_ID) === deckId,
-    }
+    };
   }
 
   startNewTrial = async () => {
-    const { deckId, storage, componentId, parentComponentId } = this.props;
-    const trialId = await storage.performAction(createTrial(deckId));;
-    
+    const {
+      deckId, storage, componentId, parentComponentId,
+    } = this.props;
+    const trialId = await storage.performAction(createTrial(deckId));
+
     Navigation.push(parentComponentId || componentId, makeTrialScreen(trialId));
   }
 
@@ -58,6 +60,6 @@ class DeckStatsContainer extends React.Component {
 
 export default withPreferences(
   withStorageData(
-    ({ deckId }) => getDeckStats(deckId)
-  )(DeckStatsContainer)
+    ({ deckId }) => getDeckStats(deckId),
+  )(DeckStatsContainer),
 );

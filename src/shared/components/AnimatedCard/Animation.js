@@ -2,9 +2,9 @@ import { Easing, Animated } from 'react-native';
 
 const assertDefinedAndNotNull = (message, variable) => {
   if (variable === undefined || variable === null) {
-    throw new Error(message)
+    throw new Error(message);
   }
-}
+};
 
 const bindAnimationToPromiseAndStart = (animation) => {
   const promise = new Promise((resolve) => {
@@ -12,13 +12,15 @@ const bindAnimationToPromiseAndStart = (animation) => {
   });
 
   return promise;
-}
+};
 
 class Animation {
   constructor(duration = 300) {
     this.duration = duration;
   }
+
   getStartVariables() {}
+
   async run(animationVariables) {}
 }
 
@@ -38,8 +40,8 @@ export class TransitionAnimation extends Animation {
 
     return Promise.all(
       targetValuesKeys.map(
-        (targetKey) => this.runAnimationForVariable(targetKey, animationVariables[targetKey])
-      )
+        targetKey => this.runAnimationForVariable(targetKey, animationVariables[targetKey]),
+      ),
     );
   }
 
@@ -52,13 +54,13 @@ export class TransitionAnimation extends Animation {
 
     return bindAnimationToPromiseAndStart(
       Animated.timing(
-        variable,            
+        variable,
         {
-          toValue: this.targetValues[key],                   
+          toValue: this.targetValues[key],
           duration: this.duration,
           easing: Easing.linear,
-        }
-      )
+        },
+      ),
     );
   }
 }
@@ -72,7 +74,7 @@ export class FadeInAnimation extends TransitionAnimation {
     return {
       opacity: new Animated.Value(0),
       scale: new Animated.Value(0.2),
-    }
+    };
   }
 
   async run(animationVariables = {}) {
@@ -95,11 +97,11 @@ export class RotateAnimation extends Animation {
 
     await bindAnimationToPromiseAndStart(Animated.sequence([
       Animated.timing(
-        rotationY,            
+        rotationY,
         {
-          toValue: 90,                   
-          duration: this.duration,              
-        }
+          toValue: 90,
+          duration: this.duration,
+        },
       ),
     ]));
 
@@ -109,25 +111,25 @@ export class RotateAnimation extends Animation {
 
     await bindAnimationToPromiseAndStart(Animated.sequence([
       Animated.timing(
-        rotationY,            
+        rotationY,
         {
-          toValue: 270,                   
-          duration: 0,              
-        }
+          toValue: 270,
+          duration: 0,
+        },
       ),
       Animated.timing(
-        rotationY,            
+        rotationY,
         {
-          toValue: 360,                   
-          duration: this.duration,              
-        }
+          toValue: 360,
+          duration: this.duration,
+        },
       ),
       Animated.timing(
-        rotationY,            
+        rotationY,
         {
-          toValue: 0,                   
-          duration: 0,              
-        }
+          toValue: 0,
+          duration: 0,
+        },
       ),
     ]));
   }

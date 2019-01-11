@@ -20,7 +20,7 @@ class CardContainer extends React.Component {
       backside: props.defaultBackside,
       faceFrontside: true,
       index: 0,
-    }
+    };
 
     this.cardRef = React.createRef();
   }
@@ -34,14 +34,14 @@ class CardContainer extends React.Component {
   }
 
   handleRequestRotation = () => {
-    this.setState(({ faceFrontside }) =>({
-      faceFrontside: !faceFrontside
+    this.setState(({ faceFrontside }) => ({
+      faceFrontside: !faceFrontside,
     }));
   }
 
   handleSuggestionPress = (suggestion) => {
     this.setState({
-      backside: this.state.backside ? `${this.state.backside}, ${suggestion}` : suggestion, 
+      backside: this.state.backside ? `${this.state.backside}, ${suggestion}` : suggestion,
     });
   }
 
@@ -63,17 +63,17 @@ class CardContainer extends React.Component {
     }
 
     if (this.shouldCreateNewCard()) {
-      this.prepareToCreateNewCard(); 
+      this.prepareToCreateNewCard();
     }
   }
 
   prepareToCreateNewCard() {
-    this.setState(({index}) => ({
+    this.setState(({ index }) => ({
       frontside: '',
       backside: '',
       index: index + 1,
       faceFrontside: true,
-    }))
+    }));
   }
 
   onChange = (newValues) => {
@@ -81,7 +81,9 @@ class CardContainer extends React.Component {
   }
 
   render() {
-    const { frontside, backside, faceFrontside, index } = this.state;
+    const {
+      frontside, backside, faceFrontside, index,
+    } = this.state;
 
     return (
       <NewCard

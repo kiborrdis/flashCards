@@ -38,7 +38,7 @@ class StorageContainer extends React.Component {
     }
   }
 
-  render () {
+  render() {
     const { children, storage } = this.props;
 
     return (

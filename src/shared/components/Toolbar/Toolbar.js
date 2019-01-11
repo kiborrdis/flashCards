@@ -5,14 +5,14 @@ const Toolbar = ({ title, actions, onActionSelected }) => (
   <ToolbarAndroid
     style={styles.toolbar}
     logo={require('./assets/logo.png')}
-    title={title} 
+    title={title}
     actions={actions}
     onActionSelected={onActionSelected}
   />
-)
+);
 
-const styles  = StyleSheet.create({
-  toolbar: { 
+const styles = StyleSheet.create({
+  toolbar: {
     height: 50,
     backgroundColor: 'yellow',
   },

@@ -4,7 +4,7 @@ import { View, TouchableHighlight, StyleSheet } from 'react-native';
 
 const SuggestionItem = ({ label, index, onPress }) => (
   <TouchableHighlight onPress={() => onPress(index)}>
-      <Label>{label}</Label>      
+    <Label>{label}</Label>
   </TouchableHighlight>
 );
 

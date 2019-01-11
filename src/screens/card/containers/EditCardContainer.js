@@ -17,14 +17,12 @@ class EditCardContainer extends React.Component {
     Navigation.pop(componentId);
   }
 
-  shouldCreateNewCard = () => {
-    return false;
-  }
+  shouldCreateNewCard = () => false
 
   async updateCard(cardSides) {
     const { cardId, storage } = this.props;
 
-    return storage.performAction(updateCardSides(cardId, cardSides));;
+    return storage.performAction(updateCardSides(cardId, cardSides));
   }
 
   render() {
@@ -46,5 +44,5 @@ class EditCardContainer extends React.Component {
 }
 
 export default withStorageData(
-  ({ cardId }) => getCard(cardId)
+  ({ cardId }) => getCard(cardId),
 )(EditCardContainer);

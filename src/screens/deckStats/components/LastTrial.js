@@ -11,17 +11,22 @@ const LastTrial = ({ loaded, data, deckId }) => (
       const stats = data;
 
       if (!stats) {
-        return <View style={styles.container}>
-          <View style={styles.title}>
-            <Label>No trials</Label>
+        return (
+          <View style={styles.container}>
+            <View style={styles.title}>
+              <Label>No trials</Label>
+            </View>
           </View>
-        </View>
+        );
       }
 
       return (
         <View style={styles.container}>
           <View style={styles.title}>
-            <Label size="medium">Last trial #{stats.trialId}</Label>
+            <Label size="medium">
+Last trial #
+              {stats.trialId}
+            </Label>
             <Label>{new Date(stats.createdAt).toLocaleDateString()}</Label>
           </View>
           <View style={styles.stats}>
@@ -42,9 +47,9 @@ const LastTrial = ({ loaded, data, deckId }) => (
       );
     }}
   </LoadingWrapper>
-)
+);
 
-const styles  = StyleSheet.create({
+const styles = StyleSheet.create({
   title: {
     paddingBottom: 5,
     flexDirection: 'row',
@@ -64,9 +69,9 @@ const styles  = StyleSheet.create({
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+  },
 });
 
 export default withStorageData(
-  ({ deckId }) => getLastTrialForDeck(deckId)
+  ({ deckId }) => getLastTrialForDeck(deckId),
 )(LastTrial);

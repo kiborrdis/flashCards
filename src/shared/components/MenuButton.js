@@ -1,5 +1,7 @@
 import React from 'react';
-import { TouchableHighlight, View, Text, Image, StyleSheet } from 'react-native';
+import {
+  TouchableHighlight, View, Text, Image, StyleSheet,
+} from 'react-native';
 import Label from './Label';
 import Menu from './Menu';
 import MenuItem from './MenuItem';
@@ -41,16 +43,16 @@ class MenuButton extends React.PureComponent {
           <MenuItem label={label} key={index} id={index} onPress={this.onItemPress} />
         ))}
       </Menu>
-    )
+    );
   }
 
   render() {
     const { icon, label } = this.props;
 
     return (
-      <Popup 
-        close={this.close} 
-        visible={this.state.visible} 
+      <Popup
+        close={this.close}
+        visible={this.state.visible}
         content={this.renderContent}
       >
         {({ targetRef }) => (
@@ -74,7 +76,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     overflow: 'visible',
-  }
+  },
 });
 
 export default MenuButton;

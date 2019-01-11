@@ -1,6 +1,6 @@
 import React from 'react';
-import PromptModal from './components/PromptModal';
 import { Navigation } from 'react-native-navigation';
+import PromptModal from './components/PromptModal';
 
 class PromptScreen extends React.Component {
   static options(passProps) {
@@ -20,7 +20,7 @@ class PromptScreen extends React.Component {
   render() {
     const { onApply, title } = this.props;
 
-    return <PromptModal close={this.close} onApply={onApply} title={title} />
+    return <PromptModal close={this.close} onApply={onApply} title={title} />;
   }
 }
 

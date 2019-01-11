@@ -1,20 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-import { TEXT_COLOR, TOPBAR_COLOR, } from '../../styles'
+import { View, Text, StyleSheet } from 'react-native';
+import { TEXT_COLOR, TOPBAR_COLOR } from '../../styles';
 
-const FRONTSIDE_COLOR = TOPBAR_COLOR; 
+const FRONTSIDE_COLOR = TOPBAR_COLOR;
 const BACKSIDE_COLOR = TEXT_COLOR;
 
 const Card = ({ value, content, faceBackside }) => (
   <View style={[styles.card, faceBackside ? styles.altCard : undefined]}>
     {
-      content 
-      ? content(value) 
-      : (
-        <Text style={[styles.text, faceBackside ? styles.altText : undefined]}>
-          {value}
-        </Text>         
-      )
+      content
+        ? content(value)
+        : (
+          <Text style={[styles.text, faceBackside ? styles.altText : undefined]}>
+            {value}
+          </Text>
+        )
     }
   </View>
 );

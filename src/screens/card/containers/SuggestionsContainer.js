@@ -1,7 +1,7 @@
 import React from 'react';
 import TranslationApi from 'shared/api/Translation';
-import Suggestions from '../components/Suggestions';
 import debounce from 'lodash/debounce';
+import Suggestions from '../components/Suggestions';
 
 class SuggestionsContainer extends React.Component {
   state = {
@@ -41,14 +41,14 @@ class SuggestionsContainer extends React.Component {
       return;
     }
 
-    this.setState({ loaded: false, lastSuggestionsLoadedFor: text, });
+    this.setState({ loaded: false, lastSuggestionsLoadedFor: text });
 
     TranslationApi.translate(text, 'en', 'ru').then((translations) => {
       this.setState({
         loaded: true,
         suggestions: translations.slice(0, 10),
         lastSuggestionsLoadedFor: text,
-      })
+      });
     });
   }, 1000)
 
@@ -57,7 +57,7 @@ class SuggestionsContainer extends React.Component {
 
     if (onPress) {
       onPress(this.state.suggestions[index]);
-    } 
+    }
   }
 
   constructChildProps() {
@@ -67,7 +67,7 @@ class SuggestionsContainer extends React.Component {
       suggestions,
       loaded,
       onPress: this.handlePress,
-    }
+    };
   }
 
   render() {

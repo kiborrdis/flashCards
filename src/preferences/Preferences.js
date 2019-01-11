@@ -25,7 +25,7 @@ class Preferences {
 
     this.loaded = true;
 
-    return this;  
+    return this;
   }
 
   deserialize(rawPreferences) {

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Navigation } from "react-native-navigation";
+import { Navigation } from 'react-native-navigation';
 import withStorageData from 'shared/containers/withStorageData';
-import { getDecks, createDeck, deleteDeck, updateDeck } from 'shared/storage/storageActions';
+import {
+  getDecks, createDeck, deleteDeck, updateDeck,
+} from 'shared/storage/storageActions';
 import { makeDeckScreen, makePromptScreen } from 'memoCards/src/shared/navigation';
 import Decks from '../components/Decks';
 
@@ -25,7 +27,7 @@ class DecksContainer extends React.Component {
   addDeck = async (deckName) => {
     const { updateData, storage } = this.props;
 
-    await storage.performAction(createDeck(deckName));;
+    await storage.performAction(createDeck(deckName));
 
     updateData();
   }
@@ -33,15 +35,15 @@ class DecksContainer extends React.Component {
   removeDeck = async (deckId) => {
     const { updateData, storage } = this.props;
 
-    storage.performAction(deleteDeck(deckId));;
+    storage.performAction(deleteDeck(deckId));
 
     updateData();
   }
 
   openRenameDeckModal = (deckId) => {
-    Navigation.showModal(makePromptScreen({ 
-      title: 'Rename deck', 
-      onApply: (name) => this.renameDeck(deckId, name), 
+    Navigation.showModal(makePromptScreen({
+      title: 'Rename deck',
+      onApply: name => this.renameDeck(deckId, name),
     }));
   }
 
@@ -65,8 +67,9 @@ class DecksContainer extends React.Component {
         onItemPress={this.onItemPress}
         removeDeck={this.removeDeck}
         renameDeck={this.openRenameDeckModal}
-        loaded={loaded} 
-        data={data} />
+        loaded={loaded}
+        data={data}
+      />
     );
   }
 }

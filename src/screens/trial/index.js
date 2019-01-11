@@ -8,12 +8,12 @@ class TrialScreen extends React.Component {
         visible: false,
         drawBehind: true,
         animate: false,
-      }
+      },
     };
   }
 
   render() {
-    return <Trial {...this.props} />
+    return <Trial {...this.props} />;
   }
 }
 

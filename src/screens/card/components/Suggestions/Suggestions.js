@@ -10,9 +10,9 @@ const Suggestions = ({ loaded, suggestions, onPress }) => (
       <Label>Suggestions</Label>
     </View>
     {(
-      loaded 
-      ? <SuggestionsList suggestions={suggestions} loaded={loaded} onPress={onPress} />
-      : <Label>Loading</Label>
+      loaded
+        ? <SuggestionsList suggestions={suggestions} loaded={loaded} onPress={onPress} />
+        : <Label>Loading</Label>
     )}
   </View>
 );

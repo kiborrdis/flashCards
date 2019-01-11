@@ -3,7 +3,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import ListItem from 'shared/components/ListItem';
 import Label from 'shared/components/Label';
 
-const CardListItem = ({ frontside, backside, cardId, removeCard, editCard }) => (
+const CardListItem = ({
+  frontside, backside, cardId, removeCard, editCard,
+}) => (
   <ListItem
     actions={[
       { label: 'Edit', onPress: () => editCard(cardId) },

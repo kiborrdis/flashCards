@@ -4,8 +4,10 @@ import { TEXT_COLOR } from 'shared/styles';
 import ListItem from 'shared/components/ListItem';
 import Label from 'shared/components/Label';
 
-const DeckListItem = ({ label, numberOfCards = 0, onPress, id, removeDeck, renameDeck }) => (
-  <ListItem 
+const DeckListItem = ({
+  label, numberOfCards = 0, onPress, id, removeDeck, renameDeck,
+}) => (
+  <ListItem
     onPress={() => onPress(id)}
     actions={[
       { label: 'Rename', onPress: () => renameDeck(id) },
@@ -19,7 +21,7 @@ const DeckListItem = ({ label, numberOfCards = 0, onPress, id, removeDeck, renam
   </ListItem>
 );
 
-const styles  = StyleSheet.create({
+const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -25,7 +25,7 @@ function separateParamsOnRequestAndPath(path, params) {
   }, { requestParams: {}, pathParams: {} });
 
   return separatedParams;
-} 
+}
 
 function parametrizePath(path, params) {
   return path.replace(/:[a-zA-Z0-9_]*/g, (match) => {
@@ -60,12 +60,12 @@ class Connector {
   }
 
   async sendRequest(path, params) {
-    const response = await fetch(this.constructFinalPath(path, params), { 
-      method: 'GET', 
-      headers: this.headers, 
+    const response = await fetch(this.constructFinalPath(path, params), {
+      method: 'GET',
+      headers: this.headers,
     });
 
-    return this.processResponse(response, { path, params }); 
+    return this.processResponse(response, { path, params });
   }
 
   constructFinalPath(path, params) {
@@ -80,13 +80,13 @@ class Connector {
 
   async processResponse(response) {
     const status = this.processResponseStatus(response);
-    const json =  await this.responseToJson(response);
+    const json = await this.responseToJson(response);
 
     return {
       status,
       json,
     };
-  } 
+  }
 
   processResponseStatus(response) {
     return {

@@ -1,10 +1,10 @@
 import { Linking } from 'react-native';
-import { Navigation } from "react-native-navigation";
+import { Navigation } from 'react-native-navigation';
 import { makeStackUsingChildScreenAndOptions, makeNewCardScreen, makeDecksScreen } from 'shared/navigation';
-import Preferences from './preferences/Preferences';
 import { SHARE_DECK_ID } from 'shared/preferences';
-import screens from './screens';
 import AppStateWatcher from 'shared/utils/AppStateWatcher';
+import Preferences from './preferences/Preferences';
+import screens from './screens';
 import withRootContainers from './containers/withRootContainers';
 import appRootOptions from './appRootOptions';
 import Database from './storage/Database';
@@ -19,7 +19,7 @@ const defaultPreferences = {
 };
 
 let appStateWatcher;
-let appPreferences; 
+let appPreferences;
 
 export default function startApp() {
   const storage = createStorage();
@@ -27,10 +27,10 @@ export default function startApp() {
 
   registerScreens(appPreferences, storage);
 
-  Navigation.events().registerAppLaunchedListener(() => Promise.all([ 
+  Navigation.events().registerAppLaunchedListener(() => Promise.all([
     waitForInitialUrl(),
     appPreferences.load(),
-  ]).then(([ url, preferences ]) => {
+  ]).then(([url, preferences]) => {
     bootstrapApp(url, { preferences, storage });
   }));
 }
@@ -42,7 +42,7 @@ function createStorage() {
 function registerScreens(preferences, storage) {
   screens.forEach((component, id) => {
     Navigation.registerComponent(id, () => withRootContainers(component, { preferences, storage }), () => component);
-  })
+  });
 }
 
 function waitForInitialUrl() {
@@ -50,7 +50,7 @@ function waitForInitialUrl() {
     console.error('Initial URL acquisition error', e);
 
     return null;
-  })
+  });
 }
 
 function bootstrapApp(url, { preferences, storage }) {
@@ -65,7 +65,7 @@ function bootstrapApp(url, { preferences, storage }) {
   }
 
   loadDefaultAppScreen();
-};
+}
 
 function registerListeners({ preferences, storage }) {
   AppStateWatcher.addEventListener('active', () => storage.open());
@@ -84,7 +84,7 @@ function loadDefaultAppScreen() {
 
 function loadUrlHandlingAppScreen(url, shareDeckId) {
   Navigation.setRoot({
-    root: makeNewCardScreen(shareDeckId, { 
+    root: makeNewCardScreen(shareDeckId, {
       defaultFrontside: extractTextFromUrl(url),
       closeOnCardCreation: true,
     }),

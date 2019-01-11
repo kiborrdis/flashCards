@@ -6,7 +6,7 @@ const Label = ({ children, size = 'default' }) => (
   <Text style={[styles.label, styles[size]]}>{children}</Text>
 );
 
-const styles  = StyleSheet.create({
+const styles = StyleSheet.create({
   big: {
     fontSize: 24,
   },
@@ -19,7 +19,7 @@ const styles  = StyleSheet.create({
   label: {
     color: TEXT_COLOR,
     fontWeight: '400',
-  }
+  },
 });
 
 export default Label;
