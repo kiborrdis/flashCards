@@ -62,7 +62,7 @@ class TrialContainer extends React.Component {
     const { data: { cards }, storage } = this.props;
     const { index } = this.state;
 
-    updateCardViewAndMatch(storage, cards[index].cardId, matched);
+    storage.performAction(updateCardViewAndMatch(cards[index].cardId, matched));
   }
 
   toNextCard = () => {
@@ -80,7 +80,7 @@ class TrialContainer extends React.Component {
     const { storage, trialId } = this.props;
     const { index } = this.state;
 
-    updateTrialViewAndMatch(storage, trialId, index + 1, this.numberOfMatches);
+    storage.performAction(updateTrialViewAndMatch(trialId, index + 1, this.numberOfMatches));
   }
 
   render() {
