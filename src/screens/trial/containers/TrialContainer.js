@@ -1,9 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import withStorageData from 'shared/containers/withStorageData';
 import { getTrialWithCards, updateCardViewAndMatch, updateTrialViewAndMatch } from 'shared/storage/storageActions';
 import Trial from '../components/Trial';
 
 class TrialContainer extends React.Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      cards: PropTypes.arrayOf(PropTypes.shape({
+        cardId: PropTypes.number.isRequired,
+      })),
+    }),
+    storage: PropTypes.shape({
+      performAction: PropTypes.func,
+    }).isRequired,
+    trialId: PropTypes.number.isRequired,
+    loaded: PropTypes.bool.isRequired,
+  }
+
   state = {
     index: 0,
     ended: false,
@@ -52,8 +66,11 @@ class TrialContainer extends React.Component {
   }
 
   toNextCard = () => {
-    if (this.props.data.cards.length - 1 > this.state.index) {
-      this.setState(({ index }) => ({ index: index + 1 }));
+    const { data } = this.props;
+    const { index } = this.state;
+
+    if (data.cards.length - 1 > index) {
+      this.setState(({ index: prevIndex }) => ({ index: prevIndex + 1 }));
     } else {
       this.setState({ ended: true });
     }
@@ -61,8 +78,9 @@ class TrialContainer extends React.Component {
 
   componentWillUnmount() {
     const { storage, trialId } = this.props;
+    const { index } = this.state;
 
-    updateTrialViewAndMatch(storage, trialId, this.state.index + 1, this.numberOfMatches);
+    updateTrialViewAndMatch(storage, trialId, index + 1, this.numberOfMatches);
   }
 
   render() {

@@ -1,15 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import withStorageData from 'shared/containers/withStorageData';
 import { getCardsFromDeck, deleteCard } from 'shared/storage/storageActions';
-import { makeNewCardScreen, makeTrialScreen, makeEditCardScreen } from 'shared/navigation';
+import { makeNewCardScreen, makeEditCardScreen } from 'shared/navigation';
 import Cards from '../components/Cards';
 
-class CardsContainer extends React.Component {
+class DeckCardsContainer extends React.Component {
+  static propTypes = {
+    loaded: PropTypes.bool.isRequired,
+    deckId: PropTypes.number.isRequired,
+    componentId: PropTypes.string.isRequired,
+    parentComponentId: PropTypes.string.isRequired,
+    updateData: PropTypes.func.isRequired,
+    storage: PropTypes.shape({
+      performAction: PropTypes.func.isRequired,
+    }).isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape({})),
+  }
+
   constructor(props) {
     super(props);
 
-    this.navigationSubscription = Navigation.events().registerNavigationButtonPressedListener(this.navigationButtonPressed);
+    this.navigationSubscription = Navigation.events().registerNavigationButtonPressedListener(
+      this.navigationButtonPressed,
+    );
   }
 
   componentWillUnmount() {
@@ -59,4 +74,4 @@ class CardsContainer extends React.Component {
 
 export default withStorageData(
   ({ deckId }) => getCardsFromDeck(deckId),
-)(CardsContainer);
+)(DeckCardsContainer);

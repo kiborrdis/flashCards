@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View, Text, Button, StyleSheet,
 } from 'react-native';
@@ -43,5 +44,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+ModalLayout.propTypes = {
+  onApply: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default ModalLayout;

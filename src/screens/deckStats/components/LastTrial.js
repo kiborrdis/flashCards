@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import LoadingWrapper from 'shared/components/LoadingWrapper';
 import Label from 'shared/components/Label';
 import withStorageData from 'shared/containers/withStorageData';
 import { getLastTrialForDeck } from 'shared/storage/storageActions';
 
-const LastTrial = ({ loaded, data, deckId }) => (
+const LastTrial = ({ loaded, data }) => (
   <LoadingWrapper loading={!loaded}>
     {() => {
       const stats = data;
@@ -24,7 +25,7 @@ const LastTrial = ({ loaded, data, deckId }) => (
         <View style={styles.container}>
           <View style={styles.title}>
             <Label size="medium">
-Last trial #
+              Last trial #
               {stats.trialId}
             </Label>
             <Label>{new Date(stats.createdAt).toLocaleDateString()}</Label>
@@ -71,6 +72,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+LastTrial.propTypes = {
+  loaded: PropTypes.bool.isRequired,
+  data: PropTypes.shape({
+    trialId: PropTypes.number,
+    createdAt: PropTypes.number,
+    numberOfCards: PropTypes.number,
+    numberOfViewedCards: PropTypes.number,
+    numberOfMatchedCards: PropTypes.number,
+  }),
+};
 
 export default withStorageData(
   ({ deckId }) => getLastTrialForDeck(deckId),

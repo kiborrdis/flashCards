@@ -17,11 +17,11 @@ class DatabaseStorage extends Storage {
     this.database = database;
   }
 
-  _openStorage() {
+  openStorage() {
     return this.database.open();
   }
 
-  _closeStorage() {
+  closeStorage() {
     return this.database.close();
   }
 

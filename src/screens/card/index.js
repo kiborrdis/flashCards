@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NewCard from './containers/NewCardContainer';
 import EditCard from './containers/EditCardContainer';
 
 class CardScreen extends React.Component {
-  static options(passProps) {
+  static propTypes = {
+    cardId: PropTypes.number,
+    componentId: PropTypes.string.isRequired,
+  }
+
+  static options() {
     return {
       topBar: {
         visible: false,

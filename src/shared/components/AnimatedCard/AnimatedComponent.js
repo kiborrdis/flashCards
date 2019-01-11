@@ -1,10 +1,20 @@
 import React from 'react';
-import {
-  TextInput, View, Text, Easing, StyleSheet, TouchableWithoutFeedback, Animated,
-} from 'react-native';
-import { FadeInAnimation, TransitionAnimation } from './Animation';
+import PropTypes from 'prop-types';
+import { Animated } from 'react-native';
+import { Animation, FadeInAnimation, TransitionAnimation } from './Animation';
 
 class AnimatedComponent extends React.Component {
+  static propTypes = {
+    appearAnimation: PropTypes.instanceOf(Animation),
+    opacity: PropTypes.number,
+    scale: PropTypes.number,
+    offset: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+    }),
+    children: PropTypes.node.isRequired,
+  }
+
   static defaultProps = {
     appearAnimation: new FadeInAnimation(),
     opacity: 1,

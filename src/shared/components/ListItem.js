@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  View, Text, StyleSheet, TouchableHighlight,
+  View, StyleSheet, TouchableHighlight,
 } from 'react-native';
 import { SEPARATOR_COLOR } from '../styles';
 import MenuButton from './MenuButton';
@@ -26,7 +27,6 @@ const ListItem = ({ children, onPress, actions }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
     height: 50,
     paddingRight: 20,
     paddingLeft: 20,
@@ -44,5 +44,11 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
 });
+
+ListItem.propTypes = {
+  children: PropTypes.node.isRequired,
+  onPress: PropTypes.func,
+  actions: PropTypes.arrayOf(PropTypes.shape({})),
+};
 
 export default ListItem;

@@ -1,9 +1,8 @@
 import React from 'react';
-import { Linking } from 'react-native';
 import Decks from './containers/DecksContainer';
 
 class DecksScreen extends React.Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         title: {

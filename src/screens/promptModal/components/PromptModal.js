@@ -1,10 +1,15 @@
 import React from 'react';
-import {
-  StyleSheet, View, Text, TextInput, Modal, Alert, TouchableHighlight, Button,
-} from 'react-native';
-import ModalLayout from 'memoCards/src/shared/components/ModalLayout';
+import PropTypes from 'prop-types';
+import { TextInput } from 'react-native';
+import ModalLayout from 'shared/components/ModalLayout';
 
 class PromptModal extends React.Component {
+  static propTypes = {
+    onApply: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    close: PropTypes.func.isRequired,
+  }
+
   state = {
     inputValue: '',
     showError: false,
@@ -44,7 +49,12 @@ class PromptModal extends React.Component {
     const { inputValue, showError } = this.state;
 
     return (
-      <ModalLayout onApply={this.onApply} onCancel={this.onCancel} title={title}>
+      <ModalLayout
+        showError={showError}
+        onApply={this.onApply}
+        onCancel={this.onCancel}
+        title={title}
+      >
         <TextInput
           style={{
             height: 40, borderColor: 'transparent', borderBottomColor: '#ccc', borderWidth: 1,

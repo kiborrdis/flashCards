@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TranslationApi from 'shared/api/Translation';
 import debounce from 'lodash/debounce';
 import Suggestions from '../components/Suggestions';
 
 class SuggestionsContainer extends React.Component {
+  static propTypes = {
+    frontside: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
+  };
+
   state = {
     loaded: true,
     suggestions: [],
@@ -18,8 +24,9 @@ class SuggestionsContainer extends React.Component {
 
   componentDidUpdate() {
     const { frontside } = this.props;
+    const { lastSuggestionsLoadedFor } = this.state;
 
-    if (frontside === '' && this.state.lastSuggestionsLoadedFor !== '') {
+    if (frontside === '' && lastSuggestionsLoadedFor !== '') {
       this.resetSuggestions();
     }
 
@@ -54,9 +61,10 @@ class SuggestionsContainer extends React.Component {
 
   handlePress = (index) => {
     const { onPress } = this.props;
+    const { suggestions } = this.state;
 
     if (onPress) {
-      onPress(this.state.suggestions[index]);
+      onPress(suggestions[index]);
     }
   }
 

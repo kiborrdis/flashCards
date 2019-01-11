@@ -39,7 +39,10 @@ export function makeEditCardScreen(cardId) {
   };
 }
 
-export function makeNewCardScreen(deckId, { defaultFrontside, defaultBackside, closeOnCardCreation } = {}) {
+export function makeNewCardScreen(
+  deckId,
+  { defaultFrontside, defaultBackside, closeOnCardCreation } = {},
+) {
   return {
     component: {
       name: CARD,

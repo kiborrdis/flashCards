@@ -25,10 +25,6 @@ const withStorageData = rawActions => (Component) => {
       }
     }
 
-    componentDidAppear() {
-      this.updateData();
-    }
-
     componentDidMount() {
       this.updateData();
     }
@@ -39,7 +35,10 @@ const withStorageData = rawActions => (Component) => {
 
     updateData = () => {
       const storage = this.context;
-      const actionExecutionPromises = actions.map(actionCreator => storage.performAction(actionCreator(this.props)), []);
+      const actionExecutionPromises = actions.map(
+        actionCreator => storage.performAction(actionCreator(this.props)),
+        [],
+      );
 
       return Promise.all(actionExecutionPromises).then((results) => {
         if (!this.unmounted) {
@@ -51,12 +50,16 @@ const withStorageData = rawActions => (Component) => {
       });
     }
 
+    componentDidAppear() {
+      this.updateData();
+    }
+
     constructChildProps() {
       const { data, loaded } = this.state;
       let dataForComponent = data;
 
       if (actions.length === 1) {
-        dataForComponent = data[0];
+        [dataForComponent] = data;
       }
 
       return {

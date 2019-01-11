@@ -43,7 +43,7 @@ class DeckStatsContainer extends React.Component {
 
     return {
       stats: data,
-      loaded: this.props.loaded,
+      loaded,
       deckId,
       sharedDeck,
       registerAsShareDeck: this.registerAsShareDeck,

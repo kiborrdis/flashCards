@@ -1,13 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import withStorageData from 'shared/containers/withStorageData';
 import {
   getDecks, createDeck, deleteDeck, updateDeck,
 } from 'shared/storage/storageActions';
-import { makeDeckScreen, makePromptScreen } from 'memoCards/src/shared/navigation';
+import { makeDeckScreen, makePromptScreen } from 'shared/navigation';
 import Decks from '../components/Decks';
 
 class DecksContainer extends React.Component {
+  static propTypes = {
+    updateData: PropTypes.func.isRequired,
+    data: PropTypes.arrayOf(PropTypes.shape({})),
+    loaded: PropTypes.bool,
+    storage: PropTypes.shape({
+      performAction: PropTypes.func,
+    }).isRequired,
+    componentId: PropTypes.string.isRequired,
+  }
+
   constructor(props) {
     super(props);
 
@@ -55,8 +66,10 @@ class DecksContainer extends React.Component {
     updateData();
   }
 
-  onItemPress = (deckId) => {
-    Navigation.push(this.props.componentId, makeDeckScreen(deckId));
+  handleItemPress = (deckId) => {
+    const { componentId } = this.props;
+
+    Navigation.push(componentId, makeDeckScreen(deckId));
   }
 
   render() {
@@ -64,7 +77,7 @@ class DecksContainer extends React.Component {
 
     return (
       <Decks
-        onItemPress={this.onItemPress}
+        onItemPress={this.handleItemPress}
         removeDeck={this.removeDeck}
         renameDeck={this.openRenameDeckModal}
         loaded={loaded}

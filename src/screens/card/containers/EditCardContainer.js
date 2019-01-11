@@ -1,10 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Navigation } from 'react-native-navigation';
 import { updateCardSides, getCard } from 'shared/storage/storageActions';
 import withStorageData from 'shared/containers/withStorageData';
 import CardContainer from './CardContainer';
 
 class EditCardContainer extends React.Component {
+  static propTypes = {
+    componentId: PropTypes.string.isRequired,
+    cardId: PropTypes.number.isRequired,
+    storage: PropTypes.shape({
+      performAction: PropTypes.func.isRequired,
+    }).isRequired,
+    loaded: PropTypes.bool.isRequired,
+    data: PropTypes.shape({
+      frontside: PropTypes.string,
+      backside: PropTypes.string,
+    }),
+  }
+
   handleCardComplete = async (cardValues) => {
     await this.updateCard(cardValues);
 
@@ -31,7 +45,7 @@ class EditCardContainer extends React.Component {
     if (!loaded) {
       return null;
     }
-    console.log('???', data);
+
     return (
       <CardContainer
         defaultFrontside={data.frontside}

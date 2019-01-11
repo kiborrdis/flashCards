@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { TextInput as NativeTextInput, StyleSheet } from 'react-native';
 import { TEXT_COLOR, TOPBAR_COLOR } from '../styles';
 
@@ -29,5 +30,13 @@ const styles = StyleSheet.create({
     color: TOPBAR_COLOR,
   },
 });
+
+TextInput.propTypes = {
+  alt: PropTypes.bool,
+  value: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  onChangeText: PropTypes.func.isRequired,
+  onEditStop: PropTypes.func,
+};
 
 export default TextInput;

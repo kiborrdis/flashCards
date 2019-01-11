@@ -1,3 +1,7 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-param-reassign */
+/* global fetch, Headers */
+
 function constructGetParamString(params) {
   const paramKeys = Object.keys(params);
 

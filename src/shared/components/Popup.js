@@ -1,11 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  View, Text, StyleSheet, Modal, TouchableWithoutFeedback, Dimensions,
+  View, StyleSheet, Modal, TouchableWithoutFeedback, Dimensions,
 } from 'react-native';
 
 class Popup extends React.Component {
   static defaultProps = {
     placement: 'center-bottom',
+  };
+
+  static propTypes = {
+    placement: PropTypes.oneOf(['center-bottom']),
+    visible: PropTypes.bool,
+    close: PropTypes.func.isRequired,
+    content: PropTypes.func.isRequired,
+    children: PropTypes.func.isRequired,
   }
 
   state = {
@@ -49,13 +58,13 @@ class Popup extends React.Component {
     };
 
     if (placement.match('center')) {
-      position.x = Math.floor(this.targetWidth / 2) - Math.floor(contentWidth / 2) + this.targetOffsetRelativeToWindow.x;
+      position.x = (Math.floor(this.targetWidth / 2) - Math.floor(contentWidth / 2))
+                    + this.targetOffsetRelativeToWindow.x;
     }
 
     if (placement.match('bottom')) {
       position.y = this.targetHeight + this.targetOffsetRelativeToWindow.y;
     }
-
 
     return position;
   }
@@ -63,10 +72,9 @@ class Popup extends React.Component {
   correctXPosition(desiredXPosition) {
     const deviceWidth = Dimensions.get('window').width;
     const { contentWidth } = this.state;
-    console.log('correction', desiredXPosition, deviceWidth, contentWidth);
 
     const correctedXPosition = Math.max(0, Math.min(desiredXPosition, deviceWidth - contentWidth));
-    console.log('end correction', correctedXPosition);
+
     return correctedXPosition;
   }
 
@@ -81,7 +89,7 @@ class Popup extends React.Component {
 
   renderModal() {
     const {
-      visible, close, position, content,
+      visible, close, content,
     } = this.props;
 
     if (!visible) {
@@ -108,7 +116,7 @@ class Popup extends React.Component {
   }
 
   render() {
-    const { content: Content, children } = this.props;
+    const { children } = this.props;
 
     return (
       <React.Fragment>

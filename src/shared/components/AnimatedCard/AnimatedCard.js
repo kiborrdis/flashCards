@@ -1,12 +1,23 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import PropTypes from 'prop-types';
 import InteractionHandler from './InteractionHandler';
 import AnimatedComponent from './AnimatedComponent';
-import { FadeInAnimation, RotateAnimation, TransitionAnimation } from './Animation';
+import { RotateAnimation, TransitionAnimation } from './Animation';
 import TextInput from '../TextInput';
 import Card from './Card';
 
 class AnimatedCard extends React.Component {
+  static propTypes = {
+    faceFrontside: PropTypes.bool,
+    onRequestRotation: PropTypes.func,
+    onSwipeLeft: PropTypes.func,
+    onSwipeRight: PropTypes.func,
+    onSidesChange: PropTypes.func,
+    frontside: PropTypes.string.isRequired,
+    backside: PropTypes.string.isRequired,
+    editable: PropTypes.bool,
+  }
+
   constructor(props) {
     super(props);
 
@@ -16,7 +27,10 @@ class AnimatedCard extends React.Component {
   }
 
   componentDidUpdate() {
-    if (this.props.faceFrontside !== undefined && this.props.faceFrontside !== this.state.faceFrontside) {
+    const { faceFrontside: externalFaceFrontside } = this.props;
+    const { faceFrontside } = this.state;
+
+    if (externalFaceFrontside !== undefined && externalFaceFrontside !== faceFrontside) {
       this.rotate();
     }
   }
@@ -77,7 +91,7 @@ class AnimatedCard extends React.Component {
   handleSideChange = (value) => {
     const { onSidesChange, frontside, backside } = this.props;
     const { faceFrontside } = this.state;
-    console.log('???????');
+
     if (onSidesChange) {
       onSidesChange({
         frontside: faceFrontside ? value : frontside,

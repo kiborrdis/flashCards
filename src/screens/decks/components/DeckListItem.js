@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { TEXT_COLOR } from 'shared/styles';
+import PropTypes from 'prop-types';
+import { View, StyleSheet } from 'react-native';
 import ListItem from 'shared/components/ListItem';
 import Label from 'shared/components/Label';
 
@@ -32,5 +32,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+
+DeckListItem.propTypes = {
+  label: PropTypes.string.isRequired,
+  numberOfCards: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  onPress: PropTypes.func.isRequired,
+  removeDeck: PropTypes.func.isRequired,
+  renameDeck: PropTypes.func.isRequired,
+};
 
 export default DeckListItem;

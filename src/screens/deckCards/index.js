@@ -1,10 +1,8 @@
 import React from 'react';
 import DeckCardsContainer from './containers/DeckCardsContainer';
 
-class DeckCardsScreen extends React.Component {
-  render() {
-    return <DeckCardsContainer {...this.props} />;
-  }
-}
+const DeckCardsScreen = props => (
+  <DeckCardsContainer {...props} />
+);
 
 export default DeckCardsScreen;

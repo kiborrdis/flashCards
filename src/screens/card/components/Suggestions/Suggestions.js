@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, TouchableHighlight, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import { View, StyleSheet } from 'react-native';
 import Label from 'shared/components/Label';
 import { TOPBAR_COLOR } from 'shared/styles';
 import SuggestionsList from './SuggestionsList';
@@ -17,7 +18,7 @@ const Suggestions = ({ loaded, suggestions, onPress }) => (
   </View>
 );
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     backgroundColor: TOPBAR_COLOR,
     padding: 5,
@@ -30,6 +31,12 @@ const styles = {
     justifyContent: 'center',
     paddingBottom: 5,
   },
+});
+
+Suggestions.propTypes = {
+  loaded: PropTypes.bool.isRequired,
+  suggestions: PropTypes.arrayOf(PropTypes.string),
+  onPress: PropTypes.func.isRequired,
 };
 
 export default Suggestions;

@@ -1,11 +1,14 @@
 import React from 'react';
-import { BackHandler } from 'react-native';
-import StorageContext from 'shared/storage/storageContext';
-import { createCardInDeck } from 'shared/storage/storageActions';
+import PropTypes from 'prop-types';
 import NewCard from '../components/NewCard';
 
 class CardContainer extends React.Component {
-  static contextType = StorageContext;
+  static propTypes = {
+    defaultFrontside: PropTypes.string,
+    defaultBackside: PropTypes.string,
+    shouldCreateNewCard: PropTypes.func,
+    onCardComplete: PropTypes.func.isRequired,
+  };
 
   static defaultProps = {
     defaultFrontside: '',
@@ -40,8 +43,10 @@ class CardContainer extends React.Component {
   }
 
   handleSuggestionPress = (suggestion) => {
+    const { backside } = this.state;
+
     this.setState({
-      backside: this.state.backside ? `${this.state.backside}, ${suggestion}` : suggestion,
+      backside: backside ? `${backside}, ${suggestion}` : suggestion,
     });
   }
 

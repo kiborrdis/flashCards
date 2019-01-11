@@ -1,10 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
 const SWIPE_CALLBACK_THRESHOLD = 100;
 const isTrue = () => true;
 
 class InteractionHandler extends React.Component {
+  static propTypes = {
+    onTap: PropTypes.func,
+    onSwipe: PropTypes.func,
+    onMove: PropTypes.func,
+    onMoveEnd: PropTypes.func,
+    children: PropTypes.node.isRequired,
+  }
+
   static defaultProps = {
     onTap: () => {},
     onSwipe: () => {},
@@ -13,7 +22,7 @@ class InteractionHandler extends React.Component {
   }
 
   handleResponderGrant = (e) => {
-    this._currentResponderAction = {
+    this.currentResponderAction = {
       type: 'tap',
       initialPosition: {
         x: e.nativeEvent.pageX,
@@ -25,12 +34,12 @@ class InteractionHandler extends React.Component {
   handleResponderMove = (event) => {
     const { onMove } = this.props;
 
-    if (this._currentResponderAction.type === 'tap') {
-      this._currentResponderAction.type = 'move';
+    if (this.currentResponderAction.type === 'tap') {
+      this.currentResponderAction.type = 'move';
     }
 
     onMove({
-      ...this._currentResponderAction,
+      ...this.currentResponderAction,
       offset: this.calculateOffsetFromNativeEvent(event.nativeEvent),
       swipe: this.isSwipeBasedOnNativeEvent(event.nativeEvent),
     });
@@ -38,19 +47,19 @@ class InteractionHandler extends React.Component {
 
   calculateOffsetFromNativeEvent(nativeEvent) {
     return {
-      x: nativeEvent.pageX - this._currentResponderAction.initialPosition.x,
-      y: nativeEvent.pageY - this._currentResponderAction.initialPosition.y,
+      x: nativeEvent.pageX - this.currentResponderAction.initialPosition.x,
+      y: nativeEvent.pageY - this.currentResponderAction.initialPosition.y,
     };
   }
 
   handleResponderRelease = (event) => {
     const { onSwipe, onMoveEnd, onTap } = this.props;
 
-    if (this._currentResponderAction.type === 'tap') {
+    if (this.currentResponderAction.type === 'tap') {
       onTap();
     }
 
-    if (this._currentResponderAction.type === 'move') {
+    if (this.currentResponderAction.type === 'move') {
       const offset = this.calculateOffsetFromNativeEvent(event.nativeEvent);
 
       if (this.isSwipeBasedOnNativeEvent(event.nativeEvent)) {
@@ -60,7 +69,7 @@ class InteractionHandler extends React.Component {
       }
     }
 
-    this._currentResponderAction = null;
+    this.currentResponderAction = null;
   }
 
   isSwipeBasedOnNativeEvent(nativeEvent) {

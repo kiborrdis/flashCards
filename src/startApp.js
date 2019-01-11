@@ -18,7 +18,6 @@ const defaultPreferences = {
   [SHARE_DECK_ID]: 1,
 };
 
-let appStateWatcher;
 let appPreferences;
 
 export default function startApp() {
@@ -41,7 +40,11 @@ function createStorage() {
 
 function registerScreens(preferences, storage) {
   screens.forEach((component, id) => {
-    Navigation.registerComponent(id, () => withRootContainers(component, { preferences, storage }), () => component);
+    Navigation.registerComponent(
+      id,
+      () => withRootContainers(component, { preferences, storage }),
+      () => component,
+    );
   });
 }
 

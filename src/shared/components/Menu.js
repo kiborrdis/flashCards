@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, View } from 'react-native';
 import { TOPBAR_COLOR } from '../styles';
 
@@ -13,5 +14,9 @@ const styles = StyleSheet.create({
     backgroundColor: TOPBAR_COLOR,
   },
 });
+
+Menu.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Menu;

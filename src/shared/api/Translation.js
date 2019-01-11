@@ -14,18 +14,7 @@ const constructTranslationParams = (text, fromLanguage, toLanguage) => ({
 });
 
 class TranslationAPI {
-  constructor(connector) {
-    this.connector = connector;
-  }
-
-  translate(text = '', fromLanguage, toLanguage) {
-    return this.connector.sendRequest(
-      '/translate',
-      constructTranslationParams(text.toLowerCase(), fromLanguage, toLanguage),
-    ).then(this.parseTranslateResult);
-  }
-
-  parseTranslateResult({ json, status }) {
+  static parseTranslateResult({ json }) {
     let translations = [];
 
     if (json.tuc) {
@@ -39,6 +28,17 @@ class TranslationAPI {
     }
 
     return translations;
+  }
+
+  constructor(connector) {
+    this.connector = connector;
+  }
+
+  translate(text = '', fromLanguage, toLanguage) {
+    return this.connector.sendRequest(
+      '/translate',
+      constructTranslationParams(text.toLowerCase(), fromLanguage, toLanguage),
+    ).then(TranslationAPI.parseTranslateResult);
   }
 }
 

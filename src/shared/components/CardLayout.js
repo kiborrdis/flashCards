@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { BACKGROUND_COLOR } from '../styles';
 
@@ -15,7 +16,7 @@ const CardLayout = ({
     <View style={styles.content}>
       {children}
     </View>
-
+    {error}
     <View style={styles.controlPanel}>
       {controlPanel}
     </View>
@@ -46,5 +47,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+CardLayout.propTypes = {
+  controlPanel: PropTypes.node,
+  topPanel: PropTypes.node,
+  children: PropTypes.node.isRequired,
+  error: PropTypes.node,
+};
 
 export default CardLayout;

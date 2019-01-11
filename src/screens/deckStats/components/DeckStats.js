@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View, StyleSheet, Button, TouchableHighlight,
 } from 'react-native';
@@ -95,5 +96,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
 });
+
+DeckStats.propTypes = {
+  loaded: PropTypes.bool.isRequired,
+  sharedDeck: PropTypes.bool.isRequired,
+  deckId: PropTypes.number,
+  stats: PropTypes.shape({
+    numberOfCards: PropTypes.number,
+    numberOfLearnedCards: PropTypes.number,
+    numberOfTrials: PropTypes.number,
+  }),
+  startNewTrial: PropTypes.func.isRequired,
+  registerAsShareDeck: PropTypes.func.isRequired,
+};
 
 export default DeckStats;

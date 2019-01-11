@@ -2,7 +2,7 @@ import React from 'react';
 import Trial from './containers/TrialContainer';
 
 class TrialScreen extends React.Component {
-  static options(passProps) {
+  static options() {
     return {
       topBar: {
         visible: false,

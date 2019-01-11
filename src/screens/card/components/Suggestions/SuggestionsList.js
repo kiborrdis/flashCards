@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import Label from 'shared/components/Label';
 import SuggestionsItem from './SuggestionsItem';
 
@@ -26,12 +27,16 @@ const SuggestionsList = ({ suggestions = [], onPress }) => {
   );
 };
 
-
 const styles = {
   list: {
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+};
+
+SuggestionsList.propTypes = {
+  suggestions: PropTypes.arrayOf(PropTypes.string),
+  onPress: PropTypes.func.isRequired,
 };
 
 export default SuggestionsList;

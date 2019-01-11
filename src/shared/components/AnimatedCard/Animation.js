@@ -1,3 +1,5 @@
+/* eslint-disable class-methods-use-this */
+
 import { Easing, Animated } from 'react-native';
 
 const assertDefinedAndNotNull = (message, variable) => {
@@ -14,20 +16,22 @@ const bindAnimationToPromiseAndStart = (animation) => {
   return promise;
 };
 
-class Animation {
+export class Animation {
   constructor(duration = 300) {
     this.duration = duration;
   }
 
   getStartVariables() {}
 
-  async run(animationVariables) {}
+  async run() {
+    return Promise.resolve();
+  }
 }
 
 export class TransitionAnimation extends Animation {
   constructor(targetValues = {}, duration) {
     super(duration);
-    console.log(targetValues.offsetX);
+
     this.targetValues = targetValues;
   }
 
@@ -47,7 +51,7 @@ export class TransitionAnimation extends Animation {
 
   runAnimationForVariable(key, variable) {
     if (!variable) {
-      console.log(`No variable for animating '${key}' value provided`);
+      console.warn(`No variable for animating '${key}' value provided`);
 
       return Promise.resolve();
     }

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import { TEXT_COLOR, TOPBAR_COLOR } from '../../styles';
 
@@ -37,5 +38,11 @@ const styles = StyleSheet.create({
     color: FRONTSIDE_COLOR,
   },
 });
+
+Card.propTypes = {
+  value: PropTypes.string.isRequired,
+  content: PropTypes.func,
+  faceBackside: PropTypes.bool,
+};
 
 export default Card;

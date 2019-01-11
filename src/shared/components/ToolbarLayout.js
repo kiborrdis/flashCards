@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { BACKGROUND_COLOR } from '../styles';
-import Toolbar from './Toolbar';
 
 const ToolbarLayout = ({ children }) => (
   <View style={styles.container}>
@@ -10,6 +10,10 @@ const ToolbarLayout = ({ children }) => (
     </View>
   </View>
 );
+
+ToolbarLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {

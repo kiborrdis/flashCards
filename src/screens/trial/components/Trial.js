@@ -1,16 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardLayout from 'shared/components/CardLayout';
 import AnimatedCard from 'shared/components/AnimatedCard';
 import Label from 'shared/components/Label';
 import {
-  TouchableHighlight, View, Text, Button, StyleSheet, Image,
+  TouchableHighlight, Text, Button, Image,
 } from 'react-native';
 
 const Trial = ({
   ended,
   index,
-  frontside = 'a',
-  backside = 'b',
+  frontside,
+  backside,
   cardRef,
   onSwipeRight,
   onSwipeLeft,
@@ -39,7 +40,7 @@ const Trial = ({
           </TouchableHighlight>
           <Button title="Iknow" onPress={onMatchCardPress} />
         </React.Fragment>
-)}
+      )}
     >
       <AnimatedCard
         ref={cardRef}
@@ -51,6 +52,19 @@ const Trial = ({
       />
     </CardLayout>
   );
+};
+
+Trial.propTypes = {
+  ended: PropTypes.bool,
+  index: PropTypes.number.isRequired,
+  frontside: PropTypes.string.isRequired,
+  backside: PropTypes.string.isRequired,
+  cardRef: PropTypes.shape({}),
+  onSwipeRight: PropTypes.func.isRequired,
+  onSwipeLeft: PropTypes.func.isRequired,
+  onRotatePress: PropTypes.func.isRequired,
+  onMatchCardPress: PropTypes.func.isRequired,
+  onSkipCardPress: PropTypes.func.isRequired,
 };
 
 export default Trial;

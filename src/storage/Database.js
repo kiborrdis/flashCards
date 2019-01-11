@@ -4,24 +4,21 @@ import initializeDatabase from './initializeDatabase';
 // SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
-const DATABASE_NAME = 'memoCard.db';
-const DATABASE_LOCATION = 'default';
-
-export class Database {
+class Database {
   constructor(name, location) {
-    this._name = name;
-    this._location = location;
-    this._database = null;
-    this._opened = false;
-    this._statusListeners = [];
+    this.name = name;
+    this.location = location;
+    this.database = null;
+    this.opened = false;
+    this.statusListeners = [];
   }
 
   async open() {
-    if (this._opened) {
-      return Promise.resolve(this._database);
+    if (this.opened) {
+      return Promise.resolve(this.database);
     }
 
-    const db = await SQLite.openDatabase({ name: this._name, location: this._location });
+    const db = await SQLite.openDatabase({ name: this.name, location: this.location });
     await initializeDatabase(db);
     this.onDatabaseOpenSuccess(db);
 
@@ -33,11 +30,11 @@ export class Database {
   }
 
   async executeQuery(queryDescription) {
-    if (!this._opened) {
+    if (!this.opened) {
       throw new Error('Impossible to execute sql. Database is not opened');
     }
 
-    return this.execute(this._database, queryDescription);
+    return this.execute(this.database, queryDescription);
   }
 
   processQueryExecutionResult = (results) => {
@@ -52,8 +49,6 @@ export class Database {
 
 
   processSqlExecutionResult = (results) => {
-    // console.log('result', results);
-
     const singleResult = results[0].db ? results[1] : results[0];
 
     if (singleResult.insertId !== undefined) {
@@ -67,7 +62,7 @@ export class Database {
     const { item, length } = result.rows;
     const extractedRows = [];
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < length; i += 1) {
       extractedRows.push(item(i));
     }
 
@@ -75,43 +70,45 @@ export class Database {
   }
 
   close() {
-    if (!this._database) {
+    if (!this.database) {
       return Promise.resolve();
     }
 
-    return this._database.close().then(this.onDatabaseCloseSuccess).catch(() => console.log('foo'));
+    return this.database.close().then(this.onDatabaseCloseSuccess).catch((error) => {
+      throw new Error(error);
+    });
   }
 
   onDatabaseCloseSuccess = () => {
-    this._opened = false;
+    this.opened = false;
 
-    this._database = null;
+    this.database = null;
 
-    this.triggerStatusListeners(this._opened);
+    this.triggerStatusListeners(this.opened);
   }
 
   onDatabaseOpenSuccess = (db) => {
-    this._database = db;
+    this.database = db;
 
-    this._opened = true;
+    this.opened = true;
 
-    this.triggerStatusListeners(this._opened);
+    this.triggerStatusListeners(this.opened);
   }
 
   triggerStatusListeners(value) {
-    this._statusListeners.forEach(listener => listener(value));
+    this.statusListeners.forEach(listener => listener(value));
   }
 
   addDatabaseStatusListener(callback) {
-    this._statusListeners.push(callback);
+    this.statusListeners.push(callback);
 
     return () => {
-      this._statusListeners.splice(this._statusListeners.indexOf(callback), 1);
+      this.statusListeners.splice(this.statusListeners.indexOf(callback), 1);
     };
   }
 
   isOpened() {
-    return !!this._database;
+    return !!this.database;
   }
 }
 

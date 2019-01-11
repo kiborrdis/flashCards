@@ -1,5 +1,4 @@
 import React from 'react';
-import { Navigation } from 'react-native-navigation';
 import PreferencesContext from '../preferences/preferencesContext';
 
 const withPreferences = (Component) => {

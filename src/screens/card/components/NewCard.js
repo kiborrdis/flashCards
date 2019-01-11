@@ -1,9 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CardLayout from 'shared/components/CardLayout';
 import AnimatedCard from 'shared/components/AnimatedCard';
-import {
-  View, Text, Button, StyleSheet,
-} from 'react-native';
+import { Button } from 'react-native';
 import SuggestionsContainer from '../containers/SuggestionsContainer';
 
 const NewCard = ({
@@ -46,5 +45,19 @@ const NewCard = ({
     />
   </CardLayout>
 );
+
+NewCard.propTypes = {
+  index: PropTypes.number.isRequired,
+  frontside: PropTypes.string,
+  backside: PropTypes.string,
+  faceFrontside: PropTypes.bool,
+  cardRef: PropTypes.shape({}),
+  onRequestRotation: PropTypes.func.isRequired,
+  onSwipe: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onRotatePress: PropTypes.func.isRequired,
+  onApplyPress: PropTypes.func.isRequired,
+  onSuggestionPress: PropTypes.func.isRequired,
+};
 
 export default NewCard;

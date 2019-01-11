@@ -1,55 +1,57 @@
+/* eslint-disable class-methods-use-this */
+
 class Storage {
   constructor() {
-    this._opened = false;
-    this._statusListeners = [];
+    this.opened = false;
+    this.statusListeners = [];
   }
 
   addStorageStatusListener(callback) {
-    this._statusListeners.push(callback);
+    this.statusListeners.push(callback);
 
     return () => {
-      this._statusListeners.splice(this._statusListeners.indexOf(callback), 1);
+      this.statusListeners.splice(this.statusListeners.indexOf(callback), 1);
     };
   }
 
   open() {
-    this._openStorage().then(this.handleStorageOpen);
+    this.openStorage().then(this.handleStorageOpen);
   }
 
-  _openStorage() {
+  openStorage() {
     return Promise.resolve();
   }
 
   handleStorageOpen = () => {
-    this._opened = true;
+    this.opened = true;
 
-    this.triggerStatusListeners(this._opened);
+    this.triggerStatusListeners(this.opened);
   }
 
   triggerStatusListeners(value) {
-    this._statusListeners.forEach(listener => listener(value));
+    this.statusListeners.forEach(listener => listener(value));
   }
 
   close() {
-    this._closeStorage().then(this.handleStorageClose);
+    this.closeStorage().then(this.handleStorageClose);
   }
 
-  _closeStorage() {
+  closeStorage() {
     return Promise.resolve();
   }
 
   handleStorageClose = () => {
-    this._opened = false;
+    this.opened = false;
 
-    this.triggerStatusListeners(this._opened);
+    this.triggerStatusListeners(this.opened);
   }
 
   isOpened() {
-    return this._opened;
+    return this.opened;
   }
 
   performAction(action) {
-    return Promise.resolve();
+    return Promise.resolve(action);
   }
 }
 

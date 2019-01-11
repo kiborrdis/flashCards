@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { StyleSheet, TouchableHighlight, View } from 'react-native';
 import Label from './Label';
 
 class MenuItem extends React.PureComponent {
+  static propTypes = {
+    onPress: PropTypes.func,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  }
+
   onPress = () => {
     const { onPress, id } = this.props;
 

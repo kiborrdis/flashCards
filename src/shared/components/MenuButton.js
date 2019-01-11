@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
-  TouchableHighlight, View, Text, Image, StyleSheet,
+  TouchableHighlight, View, Image, StyleSheet,
 } from 'react-native';
 import Label from './Label';
 import Menu from './Menu';
@@ -8,11 +9,20 @@ import MenuItem from './MenuItem';
 import Popup from './Popup';
 
 class MenuButton extends React.PureComponent {
-  state = {
-    popupOpened: false,
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
+      onPress: PropTypes.func,
+      label: PropTypes.string.isRequired,
+    })),
+    icon: PropTypes.number,
+    label: PropTypes.string,
   }
 
-  handlePress = (event) => {
+  state = {
+    visible: false,
+  }
+
+  handlePress = () => {
     this.setState({
       visible: true,
     });
@@ -40,7 +50,7 @@ class MenuButton extends React.PureComponent {
     return (
       <Menu>
         {items.map(({ label }, index) => (
-          <MenuItem label={label} key={index} id={index} onPress={this.onItemPress} />
+          <MenuItem label={label} key={label} id={index} onPress={this.onItemPress} />
         ))}
       </Menu>
     );
@@ -48,17 +58,18 @@ class MenuButton extends React.PureComponent {
 
   render() {
     const { icon, label } = this.props;
+    const { visible } = this.state;
 
     return (
       <Popup
         close={this.close}
-        visible={this.state.visible}
+        visible={visible}
         content={this.renderContent}
       >
         {({ targetRef }) => (
           <TouchableHighlight onPress={this.handlePress}>
             <View style={styles.button} ref={targetRef}>
-              {icon ? <Image style={styles.icon} source={icon} /> : <Label>{text}</Label>}
+              {icon ? <Image style={styles.icon} source={icon} /> : <Label>{label}</Label>}
             </View>
           </TouchableHighlight>
         )}
